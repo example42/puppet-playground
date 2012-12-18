@@ -1,11 +1,12 @@
-# Vagrant setup of an Example42 testlab 
+# Example42 Test Lab - Vagrant based 
 
 This repository provides a Vagrant multi vm setup for testing Example42 modules on different OS
 
 Vagrant base boxes urls have been retrieved from Internet sources.
-To remove, fix or add entries please send pull request.
 
-## INSTALLATION AND USAGE
+To remove, fix or add entries please send pull requests for Vagrantfile.
+
+## INSTALLATION
 
 Download to a work directory you want (here vagrant-example42): 
 
@@ -20,6 +21,11 @@ Initialize and update Example42 git submodules (takes time)
         cd modules
         git submodule init
         git submodule update
+
+
+## USAGE
+
+
 
 Review, if you want, the Vagrantfile in vagrant-example42 and show status
 
@@ -51,6 +57,8 @@ To destroy and rebuild from scratch
         vagrant destroy test_centos6
         vagrant up test_centos6
 
+
+## Testing Puppet code
 
 You can work and run puppet apply directly from the test box:
 
