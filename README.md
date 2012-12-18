@@ -12,11 +12,13 @@ Download to a work directory you want (here vagrant-example42):
 
         git clone --recursive https://github.com/example42/vagrant-example42.git vagrant-example42
         
-This creates the a full vagrant environment with Example42 modules to test locally (takes time to complete)
+This creates the a multi vm vagrant environment 
 
         cd vagrant-example42
 
-Initialize and update Example42 git submodules (takes time)
+This is enough to play with Puppet (see below). 
+
+If you want to test the NextGet Example42 modules set you have to initialize its submodules (takes time)
 
         cd modules
         git submodule init
@@ -24,8 +26,6 @@ Initialize and update Example42 git submodules (takes time)
 
 
 ## USAGE
-
-
 
 Review, if you want, the Vagrantfile in vagrant-example42 and show status
 
