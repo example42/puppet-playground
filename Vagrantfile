@@ -7,7 +7,7 @@ Vagrant::Config.run do |config|
     local.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
       puppet.manifest_file  = "init.pp"
-      puppet.module_path = [ "modules" ]
+      puppet.module_path = "modules"
       puppet.options = [
       '--verbose',
 #      '--debug',    
@@ -20,7 +20,7 @@ Vagrant::Config.run do |config|
     local.vm.boot_mode = :gui
     local.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
-      puppet.module_path = [ "modules" ]
+      puppet.module_path = "modules"
       puppet.manifest_file = "init.pp"
       puppet.options = [
       '--verbose',
@@ -35,7 +35,7 @@ Vagrant::Config.run do |config|
     local.vm.boot_mode = :gui
     local.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
-      puppet.module_path = [ "modules" ]
+      puppet.module_path = "modules"
       puppet.manifest_file = "init.pp"
       puppet.options = [
       '--verbose',
@@ -50,7 +50,7 @@ Vagrant::Config.run do |config|
     local.vm.boot_mode = :gui
     local.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
-      puppet.module_path = [ "modules" ]
+      puppet.module_path = "modules"
       puppet.manifest_file = "init.pp"
       puppet.options = [
       '--verbose',
@@ -64,7 +64,7 @@ Vagrant::Config.run do |config|
     local.vm.boot_mode = :gui
     local.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
-      puppet.module_path = [ "modules" ]
+      puppet.module_path = "modules"
       puppet.manifest_file = "init.pp"
       puppet.options = [
       '--verbose',
@@ -78,7 +78,7 @@ Vagrant::Config.run do |config|
     local.vm.boot_mode = :gui
     local.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
-      puppet.module_path = [ "modules" ]
+      puppet.module_path = "modules"
       puppet.manifest_file = "init.pp"
       puppet.options = [
       '--verbose',
@@ -92,7 +92,7 @@ Vagrant::Config.run do |config|
     local.vm.boot_mode = :gui
     local.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
-      puppet.module_path = [ "modules" ]
+      puppet.module_path = "modules"
       puppet.manifest_file = "init.pp"
       puppet.options = [
       '--verbose',
@@ -106,7 +106,7 @@ Vagrant::Config.run do |config|
     local.vm.boot_mode = :gui
     local.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
-      puppet.module_path = [ "modules" ]
+      puppet.module_path = "modules"
       puppet.manifest_file = "init.pp"
       puppet.options = [
       '--verbose',
@@ -120,7 +120,7 @@ Vagrant::Config.run do |config|
     local.vm.boot_mode = :gui
     local.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
-      puppet.module_path = [ "modules" ]
+      puppet.module_path = "modules"
       puppet.manifest_file = "init.pp"
       puppet.options = [
       '--verbose',
@@ -134,7 +134,7 @@ Vagrant::Config.run do |config|
     local.vm.boot_mode = :gui
     local.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
-      puppet.module_path = [ "modules" ]
+      puppet.module_path = "modules"
       puppet.manifest_file = "init.pp"
       puppet.options = [
       '--verbose',
@@ -148,7 +148,7 @@ Vagrant::Config.run do |config|
     local.vm.boot_mode = :gui
     local.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
-      puppet.module_path = [ "modules" ]
+      puppet.module_path = "modules"
       puppet.manifest_file = "init.pp"
       puppet.options = [
       '--verbose',
@@ -162,7 +162,7 @@ Vagrant::Config.run do |config|
     local.vm.boot_mode = :gui
     local.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
-      puppet.module_path = [ "modules" ]
+      puppet.module_path = "modules"
       puppet.manifest_file = "init.pp"
       puppet.options = [
       '--verbose',
