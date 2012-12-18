@@ -1,4 +1,4 @@
-= Vagrant files for a local Example42 setup 
+# Vagrant files for a local Example42 setup 
 
 This repository provides a Vagrant multi vm setup for testing Example42 modules on different OS
 
@@ -6,7 +6,7 @@ Vagrant base boxes urls have been retrieved from Internet sources.
 To remove, fix or add entries please send pull request.
 
 
-== INSTALLATION AND USAGE
+## INSTALLATION AND USAGE
 
 Download to a work directory you want (here vagrant-example42): 
 
