@@ -58,7 +58,7 @@ To destroy and rebuild from scratch
         vagrant up test_centos6
 
 
-## Testing Puppet code
+## PLAY WITH PUPPET
 
 You can work and run puppet apply directly from the test box:
 
