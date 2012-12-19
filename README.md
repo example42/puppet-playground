@@ -1,4 +1,4 @@
-# Example42 Puppet Playgroud
+# Example42 Puppet Playground
 
 This repository provides a Vagrant multi vm setup where you can easily test Puppet code on different OS.
 
@@ -22,16 +22,16 @@ This is enough to play with Puppet.
 
 ## WORK WITH MODULES
 
-You can add the modules you want in vagrant-example42/modules. For this you have various options
+You can add the modules you want in vagrant-example42/modules. For this you have various alternatives:
 
- 1 - If you want to quick test code just add resources in manifeests/init.pp (see below). 
+ **1** - If you want to **quick test code** just add resources in manifeests/init.pp (see below). 
 
 
- 2 - If you want to test modules from the **Puppet Forge** you can install them with:
+ **2** - If you want to test modules from the **Puppet Forge** you can install them with:
 
         puppet module install puppetlabs-apache  --modulepath modules/
 
- 3 - If you want to test the NextGet Example42 modules set you have to initialize its submodules (it takes some minutes)
+ **3** - If you want to test the **NextGen Example42 modules** set you have to initialize its submodules (it takes some minutes)
 
         git submodule init
         git submodule update
@@ -42,7 +42,7 @@ You can add the modules you want in vagrant-example42/modules. For this you have
         git submodule init
         git submodule update
 
-  4 - If you want to test your own modules just place them in the modules dir
+  **4** - If you want to **test your own modules** just place them in the modules dir
   
   
 ## USAGE
