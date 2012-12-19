@@ -19,6 +19,11 @@ This creates the a multi vm vagrant environment
 
 This is enough to play with Puppet.
 
+
+## WORK WITH MODULES
+
+You can add the modules you want in vagrant-example42/modules. For this you have various options
+
  1 - If you want to quick test code just add resources in manifeests/init.pp (see below). 
 
 
@@ -31,7 +36,7 @@ This is enough to play with Puppet.
         git submodule init
         git submodule update
 
-  This initializes the modules dir with Example42 modules, then you have to actually download all the single modules:
+   This initializes the modules dir with Example42 modules, then you have to actually download all the single modules:
 
         cd modules
         git submodule init
