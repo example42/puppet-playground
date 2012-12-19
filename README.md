@@ -2,7 +2,7 @@
 
 This repository provides a Vagrant multi vm setup where you can easily test Puppet code on different OS.
 
-Vagrant base boxes urls have been retrieved from Internet sources.
+Vagrant base boxes urls have been retrieved from Internet sources like [VagrantBox.es](http://www.vagrantbox.es/).
 
 To remove, fix or add entries please send pull requests for [Vagrantfile]().
 
