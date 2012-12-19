@@ -4,7 +4,7 @@ This repository provides a Vagrant multi vm setup where you can easily test Pupp
 
 Vagrant base boxes urls have been retrieved from Internet sources like [VagrantBox.es](http://www.vagrantbox.es/).
 
-To remove, fix or add entries please send pull requests for [Vagrantfile](https://github.com/example42/vagrant-example42/Vagrantfile).
+To remove, fix or add entries please send pull requests for [Vagrantfile](https://github.com/example42/vagrant-example42/blob/master/Vagrantfile).
 
 ## INSTALLATION
 
@@ -17,7 +17,7 @@ This creates a multi vm vagrant environment
         cd vagrant-example42
         vagrant status
 
-This is enough to play with Puppet in Masterless mode: default manifests is [manifests/init.pp](https://github.com/example42/vagrant-example42/manifests/init.pp), modules are in [modules/](https://github.com/example42/vagrant-example42/modules).
+This is enough to play with Puppet in Masterless mode: default manifests is [manifests/init.pp](https://github.com/example42/vagrant-example42/blob/master/manifests/init.pp), modules are in [modules/](https://github.com/example42/vagrant-example42/blob/master/modules).
 
 
 ## WORK WITH MODULES
