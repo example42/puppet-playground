@@ -31,6 +31,21 @@ Vagrant::Config.run do |config|
     end
   end
 
+  config.vm.define :Test_Centos5_32 do |local|
+    local.vm.box = "centos_56_32"
+    local.vm.box_url = "http://yum.mnxsolutions.com/vagrant/centos_56_32.box"
+    local.vm.boot_mode = :gui
+    local.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.module_path = "modules"
+      puppet.manifest_file = "init.pp"
+      puppet.options = [
+      '--verbose',
+#      '--debug',
+      ]
+    end
+  end
+
   config.vm.define :Test_Centos4_64 do |local|
     local.vm.box = "centos4_64"
     local.vm.box_url = "http://puppetlabs.s3.amazonaws.com/pub/centos4_64.box"
@@ -176,7 +191,20 @@ Vagrant::Config.run do |config|
     end
   end
 
-
+  config.vm.define :Test_OpenSuse12_64 do |local|
+    local.vm.box = "vagrant-opensuse-121-64"
+    local.vm.box_url = "https://transfert.inria.fr/fichiers/42187e68fc6312db6856f07e651cd475/vagrant-opensuse-121-64.box"
+    local.vm.boot_mode = :gui
+    local.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.module_path = "modules"
+      puppet.manifest_file = "init.pp"
+      puppet.options = [
+      '--verbose',
+#      '--debug',
+      ]
+    end
+  end
   # Solaris
   config.vm.define :Test_Solaris10_64 do |local|
     local.vm.box = "solaris10_64"
@@ -193,8 +221,8 @@ Vagrant::Config.run do |config|
     end
   end
 
-  # FreeBSD
-  config.vm.define :Test_Freebsd9_64 do |local|
+  # *BSD
+  config.vm.define :Test_FreeBSD9_64 do |local|
     local.vm.box = "freebsd_amd64_zfs"
     local.vm.box_url = "https://github.com/downloads/xironix/freebsd-vagrant/freebsd_amd64_zfs.box"
     local.vm.boot_mode = :gui
@@ -208,4 +236,20 @@ Vagrant::Config.run do |config|
       ]
     end
   end
+
+  config.vm.define :Test_OpenBSD5_64 do |local|
+    local.vm.box = "openbsd50_amd64"
+    local.vm.box_url = "https://github.com/downloads/stefancocora/openbsd_amd64-vagrant/openbsd50_amd64.box"
+    local.vm.boot_mode = :gui
+    local.vm.provision :puppet do |puppet|
+      puppet.manifests_path = "manifests"
+      puppet.module_path = "modules"
+      puppet.manifest_file = "init.pp"
+      puppet.options = [
+      '--verbose',
+#      '--debug',
+      ]
+    end
+  end
+
 end
