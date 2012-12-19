@@ -35,12 +35,12 @@ You can add the modules you want in vagrant-example42/modules. For this you have
 
         puppet module install puppetlabs-apache  --modulepath modules/
 
- **3** - If you want to test the **NextGen Example42 modules** set you have to initialize its submodules (it takes some minutes)
+ **3** - If you want to test the **NextGen Example42 modules** set you have to initialize their integration:
 
         git submodule init
         git submodule update
 
-   This initializes the modules dir with Example42 modules, then you have to actually download all the single modules:
+   This initializes the modules dir with the Example42 NextGen modules set, then you have to actually download all the single modules:
 
         cd modules
         git submodule init
@@ -135,3 +135,4 @@ Try to remove or delete the referred file:
 
         mv /Users/al/.vagrant.d/boxes/solaris10_64/include/_Vagrantfile /Users/al/.vagrant.d/boxes/solaris10_64/include/_Vagrantfile.bak
 
+Bug filings, pull requests and suggestions via GitHub are welcomed.
