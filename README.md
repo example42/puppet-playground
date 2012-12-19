@@ -4,7 +4,7 @@ This repository provides a Vagrant multi vm setup where you can easily test Pupp
 
 Vagrant base boxes urls have been retrieved from Internet sources like [VagrantBox.es](http://www.vagrantbox.es/).
 
-To remove, fix or add entries please send pull requests for [Vagrantfile]().
+To remove, fix or add entries please send pull requests for [Vagrantfile](https://github.com/example42/vagrant-example42/Vagrantfile).
 
 ## INSTALLATION
 
@@ -12,22 +12,26 @@ Clone this repo to a work directory of your choice (here vagrant-example42):
 
         git clone https://github.com/example42/vagrant-example42.git vagrant-example42
         
-This creates the a multi vm vagrant environment 
+This creates a multi vm vagrant environment 
 
         cd vagrant-example42
         vagrant status
 
-This is enough to play with Puppet.
+This is enough to play with Puppet in Masterless mode: default manifests is [manifests/init.pp](https://github.com/example42/vagrant-example42/manifests/init.pp), modules are in [modules/](https://github.com/example42/vagrant-example42/modules).
 
 
 ## WORK WITH MODULES
 
 You can add the modules you want in vagrant-example42/modules. For this you have various alternatives:
 
- **1** - If you want to **quick test code** just add resources in manifeests/init.pp (see below). 
+ **1** - If you want to **quick test Puppet resources** without using modules just add them in manifests/init.pp (see below). 
 
 
  **2** - If you want to test modules from the **Puppet Forge** you can install them with:
+
+        puppet module install <modulename>  --modulepath modules/
+
+  So, for example:
 
         puppet module install puppetlabs-apache  --modulepath modules/
 
