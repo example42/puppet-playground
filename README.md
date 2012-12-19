@@ -1,6 +1,6 @@
-# Example42 Test Lab - Vagrant based 
+# Example42 Puppet Playgroud
 
-This repository provides a Vagrant multi vm setup for testing Example42 modules on different OS
+This repository provides a Vagrant multi vm setup where you can easily test Puppet code on different OS.
 
 Vagrant base boxes urls have been retrieved from Internet sources.
 
@@ -10,22 +10,36 @@ To remove, fix or add entries please send pull requests for [Vagrantfile]().
 
 Clone this repo to a work directory of your choice (here vagrant-example42): 
 
-        git clone --recursive https://github.com/example42/vagrant-example42.git vagrant-example42
+        git clone https://github.com/example42/vagrant-example42.git vagrant-example42
         
 This creates the a multi vm vagrant environment 
 
         cd vagrant-example42
         vagrant status
 
-This is enough to play with Puppet code (see below). 
+This is enough to play with Puppet.
 
-If you want to test the NextGet Example42 modules set you have to initialize its submodules (takes time)
+ 1 - If you want to quick test code just add resources in manifeests/init.pp (see below). 
+
+
+ 2 - If you want to test modules from the **Puppet Forge** you can install them with:
+
+        puppet module install puppetlabs-apache  --modulepath modules/
+
+ 3 - If you want to test the NextGet Example42 modules set you have to initialize its submodules (it takes some minutes)
+
+        git submodule init
+        git submodule update
+
+  This initializes the modules dir with Example42 modules, then you have to actually download all the single modules:
 
         cd modules
         git submodule init
         git submodule update
 
-
+  4 - If you want to test your own modules just place them in the modules dir
+  
+  
 ## USAGE
 
 Review, if you want, the Vagrantfile in vagrant-example42 and show the available OS
@@ -39,6 +53,8 @@ Edit and play with the Puppet manifest applied on the boxes
         
 This is your test ground, add resources, use modules, declare classes... 
 
+For sample code that uses Example42 modules, look at the other files in manifest/*.pp.
+
 See how your code behaves on the selected test box:
 
         vagrant up test_centos6
@@ -51,7 +67,7 @@ Once created the VM connect to it with:
 
 To exit form the shell on the VM
 
-        exit
+        vm# exit
 
 To restart your VM:
 
@@ -71,12 +87,12 @@ You can test and apply code directly from the VM:
 
 From a shell on the VM get the superpowers and move to vagrant configs:
 
-        sudo -s
-        cd /tmp/vagrant-puppet/
+        vm# sudo -s
+        vm# cd /tmp/vagrant-puppet/
 
 To try some Puppet code edit the manifest file:
 
-        vi manifests/init.pp
+        vm# vi manifests/init.pp
         
 You can work on it both from your system and the VM.
 
@@ -86,7 +102,7 @@ On the VM is mounted on /tmp/vagrant-puppet/manifests/init.pp
 
 From the VM you can run a **test** with:
 
-        puppet apply -v --modulepath '/tmp/vagrant-puppet/modules-0' --pluginsync /tmp/vagrant-puppet/manifests/init.pp
+        vm# puppet apply -v --modulepath '/tmp/vagrant-puppet/modules-0' --pluginsync /tmp/vagrant-puppet/manifests/init.pp
 
 From your host:
 
