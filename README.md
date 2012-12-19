@@ -118,3 +118,16 @@ To test the code on all the running nodes
 
         vagrant provision
         
+## CAVEATS
+
+Not all the Vagrant boxes have been widely tested, they have probably old versions of the VirtualBox Guest Additions and maybe 
+provide not updated Vagrant configurations.
+
+If you find errors like:
+
+        /Users/al/.vagrant.d/boxes/solaris10_64/include/_Vagrantfile:7: undefined method `system=' for #<Vagrant::Config::VMConfig:0x1025fc5a0> (NoMethodError)
+
+Try to remove or delete the referred file:
+
+        mv /Users/al/.vagrant.d/boxes/solaris10_64/include/_Vagrantfile /Users/al/.vagrant.d/boxes/solaris10_64/include/_Vagrantfile.bak
+
