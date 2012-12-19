@@ -66,13 +66,13 @@ For sample code that uses Example42 modules, look at the other files in manifest
 
 See how your code behaves on the selected test box:
 
-        vagrant up test_centos6
+        vagrant up Test_Centos6_64
 
 This may take a while, the first time, to download the box.
 
 Once created the VM connect to it with:
 
-        vagrant ssh test_centos6
+        vagrant ssh Test_Centos6_64
 
 To exit form the shell on the VM
 
@@ -80,19 +80,19 @@ To exit form the shell on the VM
 
 To restart your VM:
 
-        vagrant reload test_centos6
+        vagrant reload Test_Centos6_64
 
 To destroy and rebuild from scratch
 
-        vagrant destroy test_centos6
-        vagrant up test_centos6
+        vagrant destroy Test_Centos6_64
+        vagrant up Test_Centos6_64
 
 
 ## PLAY WITH PUPPET
 
 You can test and apply code directly from the VM:
 
-        vagrant ssh test-centos6
+        vagrant ssh Test_Centos6_64
 
 From a shell on the VM get the superpowers and move to vagrant configs:
 
@@ -115,7 +115,7 @@ From the VM you can run a **test** with:
 
 From your host:
 
-        vagrant provision test_centos6
+        vagrant provision Test_Centos6_64
 
 
 To test the code on all the running nodes
