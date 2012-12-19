@@ -17,7 +17,7 @@ This creates a multi vm vagrant environment
         cd vagrant-example42
         vagrant status
 
-This is enough to play with Puppet in Masterless mode: default manifests is [manifests/init.pp](https://github.com/example42/vagrant-example42/blob/master/manifests/init.pp), modules are in [modules/](https://github.com/example42/vagrant-example42/blob/master/modules).
+This is enough to play with Puppet in Masterless mode: default manifest is **[manifests/init.pp](https://github.com/example42/vagrant-example42/blob/master/manifests/init.pp)**, modules are in **modules/**.
 
 
 ## WORK WITH MODULES
