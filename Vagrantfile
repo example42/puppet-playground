@@ -88,7 +88,7 @@ Vagrant::Config.run do |config|
   end
   config.vm.define :test_sl6_64 do |local|
     local.vm.box = "sl6_64"
-    local.vm.box_url = "http://download.frameos.org/sl6-64-nochef.box"
+    local.vm.box_url = "http://lyte.id.au/vagrant/sl6-64-lyte.box"
     local.vm.boot_mode = :gui
     local.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
