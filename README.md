@@ -17,14 +17,14 @@ This creates a multi vm vagrant environment
         cd vagrant-example42
         vagrant status
 
-This is enough to play with Puppet in Masterless mode: default manifests is [manifests/init.pp](https://github.com/example42/vagrant-example42/blob/master/manifests/init.pp), modules are in [modules/](https://github.com/example42/vagrant-example42/blob/master/modules).
+This is enough to play with Puppet in Masterless mode: default manifest is **[manifests/init.pp](https://github.com/example42/vagrant-example42/blob/master/manifests/init.pp)**, modules are in **modules/**.
 
 
 ## WORK WITH MODULES
 
 You can add the modules you want in vagrant-example42/modules. For this you have various alternatives:
 
- **1** - If you want to **quick test Puppet resources** without using modules just add them in manifests/init.pp (see below). 
+ **1** - If you want to **quick test Puppet resources** without using modules just write your Puppet code in **manifests/init.pp** (see below). 
 
 
  **2** - If you want to test modules from the **Puppet Forge** you can install them with:
@@ -35,7 +35,7 @@ You can add the modules you want in vagrant-example42/modules. For this you have
 
         puppet module install puppetlabs-apache  --modulepath modules/
 
- **3** - If you want to test the **NextGen Example42 modules** set you have to initialize their integration:
+ **3** - If you want to test the **NextGen Example42 modules** you have to activate their integration:
 
         git submodule init
         git submodule update
@@ -60,9 +60,9 @@ Edit and play with the Puppet manifest applied on the boxes
 
         vi manifests/init.pp
         
-This is your test ground, add resources, use modules, declare classes... 
+This is your test playground, add resources, use modules, declare classes... 
 
-For sample code that uses Example42 modules, look at the other files in manifest/*.pp.
+For sample code that uses Example42 modules, look at the other files in **manifest/*.pp**.
 
 See how your code behaves on the selected test box:
 
@@ -105,9 +105,9 @@ To try some Puppet code edit the manifest file:
         
 You can work on it both from your system and the VM.
 
-On your system is in vagrant-example42/manifests/init.pp
+On your system is in **vagrant-example42/manifests/init.pp**
 
-On the VM is mounted on /tmp/vagrant-puppet/manifests/init.pp 
+On the VM is available at **/tmp/vagrant-puppet/manifests/init.pp** 
 
 From the VM you can run a **test** with:
 
