@@ -192,8 +192,8 @@ Vagrant::Config.run do |config|
   end
 
   config.vm.define :Test_OpenSuse12_64 do |local|
-    local.vm.box = "vagrant-opensuse-121-64"
-    local.vm.box_url = "https://transfert.inria.fr/fichiers/42187e68fc6312db6856f07e651cd475/vagrant-opensuse-121-64.box"
+    local.vm.box = "OpenSuse12_1x64_July14"
+    local.vm.box_url = "https://s3.amazonaws.com/circlejtp/OpenSuseVagrant/OpenSuse12_1x64_July14.box"
     local.vm.boot_mode = :gui
     local.vm.provision :puppet do |puppet|
       puppet.manifests_path = "manifests"
