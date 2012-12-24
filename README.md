@@ -47,9 +47,14 @@ You can add the modules you want in vagrant-example42/modules. For this you have
         git submodule update
 
   **4** - If you want to **test your own modules** just place them in the modules dir
+
+  **5** - If you want to **test librarian-puppet toasters** use the toast.sh script (more details below) 
+
+        gem install librarian-puppet
+        ./toast.sh
   
   
-## USAGE
+## VAGRANT USAGE
 
 Review, if you want, the Vagrantfile in vagrant-example42 and show the available OS
 
@@ -117,12 +122,40 @@ From your host:
 
         vagrant provision Test_Centos6_64
 
-
 To test the code on all the running nodes
 
         vagrant provision
         
+
+## USE BUNDLED TOASTERS
+
+You can experiment with bundles of modules and Puppet code with the **toast.sh** script. It copies configurations from the **toasters/**
+directory to **manifests/init.pp** and **Puppetfile** and runs **librarian-puppet** to automatically install the required modules in the **modules/** directory.
+
+To show the available toasters:
+
+        ./toash.sh list
+
+To install a specific toaster:
+
+        ./toash.sh install garethr-riemann
+
+To install and directly test on the running boxes a specific toaster
+
+        ./toash.sh run garethr-riemann
+
+To show the status of currently installed modules and manifests/init.pp
+
+        ./toast.sh status
+
+To cleanup the modules directory, the Puppetfile and manifests/init.pp (Beware all the existing changes will be wiped off)
+
+        ./toast.sh clean
+
+
 ## CAVEATS
+
+### Broken Vagrant Boxes
 
 Not all the Vagrant boxes have been widely tested, they have probably old versions of the VirtualBox Guest Additions and maybe 
 provide not updated Vagrant configurations.
@@ -135,4 +168,24 @@ Try to remove or delete the referred file:
 
         mv /Users/al/.vagrant.d/boxes/solaris10_64/include/_Vagrantfile /Users/al/.vagrant.d/boxes/solaris10_64/include/_Vagrantfile.bak
 
-Bug filings, pull requests and suggestions via GitHub are welcomed.
+Some boxes (currently the ones with the ToFix prefix) are not fully working for Puppet provisioning. 
+
+
+### Modules directory
+
+The cohexistence of different ways to manage the modules directory (with puppet module tool, with the Example42 NextGen git repo, with custom modules r via librarian-puppet) may create inconsistent status, if you mix these methods.
+
+Start from an empty modules dir to have a clean setup good for every use.
+
+
+## SUPPORT AND BUGS
+
+Please submit bug filings, pull requests and suggestions via GitHub.
+
+This Puppet Playground might become more and more useful if:
+
+  - More Working vagrant Boxes are provided for different OS
+
+  - More toasters are provided that use different modules sets with librarian-puppet
+
+Any contribution to these is very welcomed.
