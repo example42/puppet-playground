@@ -2,5 +2,4 @@
 .librarian
 .tmp/
 modules/
-Puppetfile
 Puppetfile.lock
