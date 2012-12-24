@@ -4,25 +4,25 @@ This repository provides a Vagrant multi vm setup where you can easily test Pupp
 
 Vagrant base boxes urls have been retrieved from Internet sources like [VagrantBox.es](http://www.vagrantbox.es/).
 
-To remove, fix or add entries please send pull requests for [Vagrantfile](https://github.com/example42/vagrant-example42/blob/master/Vagrantfile).
+To remove, fix or add entries please send pull requests for [Vagrantfile](https://github.com/example42/puppet-playground/blob/master/Vagrantfile).
 
 ## INSTALLATION
 
-Clone this repo to a work directory of your choice (here vagrant-example42): 
+Clone this repo to a work directory of your choice (here puppet-playground): 
 
-        git clone https://github.com/example42/vagrant-example42.git vagrant-example42
+        git clone https://github.com/example42/puppet-playground.git puppet-playground
         
 This creates a multi vm vagrant environment 
 
-        cd vagrant-example42
+        cd puppet-playground
         vagrant status
 
-This is enough to play with Puppet in Masterless mode: default manifest is **[manifests/init.pp](https://github.com/example42/vagrant-example42/blob/master/manifests/init.pp)**, modules are in **modules/**.
+This is enough to play with Puppet in Masterless mode: default manifest is **[manifests/init.pp](https://github.com/example42/puppet-playground/blob/master/manifests/init.pp)**, modules are in **modules/**.
 
 
 ## WORK WITH MODULES
 
-You can add the modules you want in vagrant-example42/modules. For this you have various alternatives:
+You can add the modules you want in puppet-playground/modules. For this you have various alternatives:
 
  **1** - If you want to **quick test Puppet resources** without using modules just write your Puppet code in **manifests/init.pp** (see below). 
 
@@ -56,7 +56,7 @@ You can add the modules you want in vagrant-example42/modules. For this you have
   
 ## VAGRANT USAGE
 
-Review, if you want, the Vagrantfile in vagrant-example42 and show the available OS
+Review, if you want, the Vagrantfile in puppet-playground and show the available OS
 
         cat Vagrantfile
         vagrant status
@@ -110,7 +110,7 @@ To try some Puppet code edit the manifest file:
         
 You can work on it both from your system and the VM.
 
-On your system is in **vagrant-example42/manifests/init.pp**
+On your system is in **puppet-playground/manifests/init.pp**
 
 On the VM is available at **/tmp/vagrant-puppet/manifests/init.pp** 
 
