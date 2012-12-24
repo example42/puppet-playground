@@ -1,4 +1,4 @@
-# Example42 Puppet Playground
+# Puppet Playground
 
 This repository provides a Vagrant multi vm setup where you can easily test Puppet code on different OS.
 
