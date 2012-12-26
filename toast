@@ -9,6 +9,7 @@ $0 list              - List Available toasters
 $0 install <toaster> - Install the specified toaster (it will overwrite Puppetfile, manifests/init.pp and the modules directory
 $0 run <toaster>     - Install and run the specified toaster on the running Vagrant boxes
 $0 clean             - Cleans everything: Beware: this will delete Puppetfile, manifests/init.pp and the modules directory
+$0 puppi <command>   - Run Puppi commands on active boxes
 $0 status            - Show active toaster setup
 EOF
 }
@@ -36,8 +37,15 @@ install_toaster() {
 }
 
 run_toaster() {
+  install_toaster
   echo_title "Running vagrant provision"
   vagrant provision
+}
+
+run_puppi() {
+  for vm in $(vagrant status | grep 'running$' | cut -d ' ' -f 1 ) ; do
+    vagrant ssh $vm -c "sudo puppi $puppi_action"
+  done
 }
 
 clean() {
@@ -47,6 +55,7 @@ clean() {
     echo_title "Removing modules dir, manifests/init.pp and Puppetfile"
     rm -rf modules/
     rm -f Puppetfile
+    rm -f Puppetfile.lock
     rm -f manifests/init.pp
   fi
 }
@@ -82,6 +91,11 @@ while [ $# -gt 0 ]; do
       toaster=$2
       shift 2
       ;;
+    puppi)
+      action=$1
+      puppi_action=$2
+      shift 2
+      ;;
     *)
       showhelp
       exit
@@ -95,6 +109,7 @@ case $action in
   clean) clean ;;
   status) status ;;
   run ) install_toaster ; run_toaster ;;
+  puppi ) run_puppi ;;
   * ) showhelp ;;
 esac
 
