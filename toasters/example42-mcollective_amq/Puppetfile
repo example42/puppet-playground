@@ -1,5 +1,0 @@
-forge "http://forge.puppetlabs.com"
-
-mod 'example42/mcollective'
-mod 'example42/activemq'
-mod 'example42/yum'
