@@ -55,13 +55,7 @@ run_puppi() {
 setup_example42() {
   clean
   echo_title "Setting up Example42 NetGen modules"
-  git submodule init
-  git submodule update
-
-  echo_title "Cloning modules from GitHub repo"
-  cd modules 
-  git submodule init
-  git submodule update
+  git clone --recursive https://github.com/example42/puppet-modules-nextgen.git modules
 }
 
 clean() {

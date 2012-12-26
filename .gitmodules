@@ -1,3 +1,0 @@
-[submodule "modules"]
-	path = modules
-	url = https://github.com/example42/puppet-modules-nextgen.git
