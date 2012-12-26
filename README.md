@@ -1,8 +1,8 @@
 # Puppet Playground
 
-This is a Puppet Playground where you can easily test and play with Puppet code on different VMs
+Welcome to the Puppet Playground where you can play with Puppet and also do some serious stuff.
 
-It's a Vagrant multi vm environment setup where you can easily test Puppet code on different OS.
+It's basically a Vagrant multi vm environment setup where you can easily test Puppet code on different OS.
 
 Vagrant base boxes urls have been retrieved from Internet sources like [VagrantBox.es](http://www.vagrantbox.es/).
 
@@ -26,28 +26,23 @@ This is enough to play with Puppet in Masterless mode: default manifest is **[ma
 
 You can add the modules you want in puppet-playground/modules. For this you have various alternatives:
 
- **1** - If you want to **quick test Puppet resources** without using modules just write your Puppet code in **manifests/init.pp** (see below). 
+  **1** - If you want to **quick test Puppet resources** without using modules just write your Puppet code in **manifests/init.pp** (see below). 
 
 
- **2** - If you want to test modules from the **Puppet Forge** you can install them with:
+  **2** - If you want to test modules from the **Puppet Forge** you can install them with:
 
         puppet module install <modulename>  --modulepath modules/
 
-  So, for example:
+So, for example:
 
         puppet module install puppetlabs-apache  --modulepath modules/
 
 
- **3** - If you want to test the **NextGen Example42 modules** you have to activate their integration:
+  **3** - If you want to test the NextGen Example42 modules you can just type
+ 
+        ./play setup example42
 
-        git submodule init
-        git submodule update
-
-   This initializes the modules dir with the Example42 NextGen modules set, then you have to actually download all the single modules:
-
-        cd modules
-        git submodule init
-        git submodule update
+This initializes the modules dir with the Example42 NextGen modules, directly cloned from GitHub.
 
   **4** - If you want to **test your own modules** just place them in the modules dir
 

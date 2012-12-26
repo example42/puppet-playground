@@ -13,6 +13,7 @@ $0 install <toaster> - Install the specified toaster on the playground
 $0 status            - Show active playground status
 $0 run [toaster]     - Run current playground
 $0 clean             - Clean up the playground
+$0 setup example42   - Install the full Example42 modules set
 $0 puppi <command>   - Execute puppi commands on running boxes
 EOF
 }
@@ -49,6 +50,18 @@ run_puppi() {
   for vm in $(vagrant status | grep 'running$' | cut -d ' ' -f 1 ) ; do
     vagrant ssh $vm -c "sudo puppi $puppi_action"
   done
+}
+
+setup_example42() {
+  clean
+  echo_title "Setting up Example42 NetGen modules"
+  git submodule init
+  git submodule update
+
+  echo_title "Cloning modules from GitHub repo"
+  cd modules 
+  git submodule init
+  git submodule update
 }
 
 clean() {
@@ -101,6 +114,11 @@ while [ $# -gt 0 ]; do
       toaster=$2
       shift 2
       ;;
+    setup)
+      action=$1
+      setup_action=$2
+      shift 2
+      ;;
     puppi)
       action=$1
       puppi_action=$2
@@ -119,6 +137,7 @@ case $action in
   clean) clean ;;
   status) status ;;
   run ) install_toaster ; run_toaster ;;
+  setup ) setup_$setup_action ;;
   puppi ) run_puppi ;;
   * ) showhelp ;;
 esac
