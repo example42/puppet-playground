@@ -1,5 +1,6 @@
 .vagrant
 .librarian
 .tmp/
-manifests/init.pp
+#manifests/init.pp
+#modules
 ^Puppetfile.lock
