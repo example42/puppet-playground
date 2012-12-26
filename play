@@ -5,13 +5,13 @@ toasterdir='toasters/'
 showhelp () {
 cat << EOF
 Play with Puppet code.
-Your playground is modules/* and manifests/init.pp 
+Your playground is the modules directory, Puppetfile and manifests/init.pp 
 
 Usage: $0 <action> [argument]
 $0 list              - List available toasters 
 $0 install <toaster> - Install the specified toaster on the playground
 $0 status            - Show active playground status
-$0 run [toaster]     - Run current playground
+$0 run               - Run current playground
 $0 clean             - Clean up the playground
 $0 setup example42   - Install the full Example42 modules set
 $0 puppi <command>   - Execute puppi commands on running boxes
@@ -40,7 +40,7 @@ install_toaster() {
   librarian-puppet install
 }
 
-run_toaster() {
+run_playground() {
   echo_title "Running the playground (vagrant provision ;-)"
   vagrant provision
 }
@@ -105,8 +105,7 @@ while [ $# -gt 0 ]; do
       ;;
     run)
       action=$1
-      toaster=$2
-      shift 2
+      shift 1
       ;;
     setup)
       action=$1
@@ -130,7 +129,7 @@ case $action in
   install) install_toaster ;;
   clean) clean ;;
   status) status ;;
-  run ) install_toaster ; run_toaster ;;
+  run ) run_playground ;;
   setup ) setup_$setup_action ;;
   puppi ) run_puppi ;;
   * ) showhelp ;;
