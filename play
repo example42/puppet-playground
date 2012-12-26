@@ -4,13 +4,16 @@ toasterdir='toasters/'
 
 showhelp () {
 cat << EOF
-Usage: $0 <action> [toaster]
-$0 list              - List Available toasters
-$0 install <toaster> - Install the specified toaster (it will overwrite Puppetfile, manifests/init.pp and the modules directory
-$0 run <toaster>     - Install and run the specified toaster on the running Vagrant boxes
-$0 clean             - Cleans everything: Beware: this will delete Puppetfile, manifests/init.pp and the modules directory
-$0 puppi <command>   - Run Puppi commands on active boxes
-$0 status            - Show active toaster setup
+Play with Puppet code.
+Your playground is modules/* and manifests/init.pp 
+
+Usage: $0 <action> [argument]
+$0 list              - List available toasters 
+$0 install <toaster> - Install the specified toaster on the playground
+$0 status            - Show active playground status
+$0 run [toaster]     - Run current playground
+$0 clean             - Clean up the playground
+$0 puppi <command>   - Execute puppi commands on running boxes
 EOF
 }
 
@@ -24,12 +27,12 @@ echo_title () {
 }
 
 list_toaster() {
-  echo_title "Available toasters"
+  echo_title "Available toasters for $0 install"
   ls -1 $toasterdir
 }
 
 install_toaster() {
-  echo_title "Copying toaster files"  
+  echo_title "Placing toaster files in the Playground"  
   cp -f $toasterdir/$toaster/Puppetfile Puppetfile
   cp -f $toasterdir/$toaster/init.pp manifests/init.pp
   echo_title "Running librarian-puppet install"  
@@ -37,22 +40,22 @@ install_toaster() {
 }
 
 run_toaster() {
-  install_toaster
-  echo_title "Running vagrant provision"
+  echo_title "Running the playground (vagrant provision ;-)"
   vagrant provision
 }
 
 run_puppi() {
+  echo_title "Running puppi $puppi_action on the boxes in the playground"
   for vm in $(vagrant status | grep 'running$' | cut -d ' ' -f 1 ) ; do
     vagrant ssh $vm -c "sudo puppi $puppi_action"
   done
 }
 
 clean() {
-  echo "I'm going to delete: the modules/ dir, manifests/init.pp and Puppetfile... Are you Sure? (y/N)"
+  echo "I'm going to wipe out the Playground: the modules/ dir, manifests/init.pp and Puppetfile... Are you Sure? (y/N)"
   read answer
   if [ "x$answer" == "xy" ] ; then
-    echo_title "Removing modules dir, manifests/init.pp and Puppetfile"
+    echo_title "Removing modules dir, manifests/init.pp and Puppetfile from the Playground"
     rm -rf modules/
     rm -f Puppetfile
     rm -f Puppetfile.lock
@@ -61,8 +64,15 @@ clean() {
 }
 
 status() {
-  echo_title "Installed Modules"
+  echo_title "Modules status (puppet module list --modulepath=modules/) "
+  puppet module list --modulepath=modules/
+
+  echo_title "Modules status (librarian-puppet show) "
   librarian-puppet show
+
+  echo_title "Content of modules/ directory "
+  ls -l modules/
+  
   echo_title "Content of manifests/init.pp"
   cat manifests/init.pp
 }

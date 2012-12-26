@@ -1,6 +1,8 @@
 # Puppet Playground
 
-This repository provides a Vagrant multi vm setup where you can easily test Puppet code on different OS.
+This is a Puppet Playground where you can easily test and play with Puppet code on different VMs
+
+It's a Vagrant multi vm environment setup where you can easily test Puppet code on different OS.
 
 Vagrant base boxes urls have been retrieved from Internet sources like [VagrantBox.es](http://www.vagrantbox.es/).
 
@@ -35,6 +37,7 @@ You can add the modules you want in puppet-playground/modules. For this you have
 
         puppet module install puppetlabs-apache  --modulepath modules/
 
+
  **3** - If you want to test the **NextGen Example42 modules** you have to activate their integration:
 
         git submodule init
@@ -48,10 +51,10 @@ You can add the modules you want in puppet-playground/modules. For this you have
 
   **4** - If you want to **test your own modules** just place them in the modules dir
 
-  **5** - If you want to **test librarian-puppet toasters** use the toast command (more details below) 
+  **5** - If you want to **test librarian-puppet toasters** use the play command (see below) 
 
         gem install librarian-puppet
-        ./toast
+        ./play
   
   
 ## VAGRANT USAGE
@@ -93,7 +96,7 @@ To destroy and rebuild from scratch
         vagrant up Test_Centos6_64
 
 
-## PLAY WITH PUPPET
+## WORK WITH PUPPET
 
 You can test and apply code directly from the VM:
 
@@ -127,30 +130,34 @@ To test the code on all the running nodes
         vagrant provision
         
 
-## USE BUNDLED TOASTERS
+## PLAY IN THE PLAYGROUND
 
-You can experiment with bundles of modules and Puppet code with the **toast** script. It copies configurations from the **toasters/**
-directory to **manifests/init.pp** and **Puppetfile** and runs **librarian-puppet** to automatically install the required modules in the **modules/** directory.
+Many of the activities described before can be done and automated with the play command.
+It manages the Puppet Playground, namely the default manifest, located in **manifests/init.pp** , the **Puppetfile** and the content of the **modules/** directory.
 
-To show the available toasters:
+To show the status of the playground
 
-        ./toast list
+        ./play status
 
-To install a specific toaster:
+To show the available toasters for ./play install:
 
-        ./toast install garethr-riemann
+        ./play list
 
-To install and directly test on the running boxes a specific toaster
+To install a specific toaster via librarian-puppet :
 
-        ./toast run garethr-riemann
+        ./play install garethr-riemann
 
-To show the status of currently installed modules and manifests/init.pp
+To run the current playground (same as vagrant provision)
 
-        ./toast status
+        ./play run
 
-To cleanup the modules directory, the Puppetfile and manifests/init.pp (Beware all the existing changes will be wiped off)
+To cleanup the whole playground (Beware all the existing changes will be wiped off)
 
-        ./toast clean
+        ./play clean
+
+To run puppi commands on all the active boxes (note: Puppi must included in the playground)
+
+        ./play puppi check
 
 
 ## CAVEATS
