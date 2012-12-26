@@ -1,0 +1,21 @@
+forge "http://forge.puppetlabs.com"
+
+mod 'example42/puppi',
+  :git => 'git://github.com/example42/puppi.git'
+
+mod 'example42/puppet',
+  :git => 'git://github.com/example42/puppet-puppet.git'
+
+mod 'example42/monitor',
+  :git => 'git://github.com/example42/puppet-monitor.git'
+
+mod 'example42/firewall'
+  :git => 'git://github.com/example42/puppet-firewall.git'
+
+mod 'example42/apache',
+  :git => 'git://github.com/example42/puppet-apache.git'
+
+mod 'example42/yum',
+  :git => 'git://github.com/example42/puppet-yum.git'
+
+
