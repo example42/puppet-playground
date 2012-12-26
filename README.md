@@ -48,10 +48,10 @@ You can add the modules you want in puppet-playground/modules. For this you have
 
   **4** - If you want to **test your own modules** just place them in the modules dir
 
-  **5** - If you want to **test librarian-puppet toasters** use the toast.sh script (more details below) 
+  **5** - If you want to **test librarian-puppet toasters** use the toast command (more details below) 
 
         gem install librarian-puppet
-        ./toast.sh
+        ./toast
   
   
 ## VAGRANT USAGE
@@ -129,28 +129,28 @@ To test the code on all the running nodes
 
 ## USE BUNDLED TOASTERS
 
-You can experiment with bundles of modules and Puppet code with the **toast.sh** script. It copies configurations from the **toasters/**
+You can experiment with bundles of modules and Puppet code with the **toast** script. It copies configurations from the **toasters/**
 directory to **manifests/init.pp** and **Puppetfile** and runs **librarian-puppet** to automatically install the required modules in the **modules/** directory.
 
 To show the available toasters:
 
-        ./toash.sh list
+        ./toast list
 
 To install a specific toaster:
 
-        ./toash.sh install garethr-riemann
+        ./toast install garethr-riemann
 
 To install and directly test on the running boxes a specific toaster
 
-        ./toash.sh run garethr-riemann
+        ./toast run garethr-riemann
 
 To show the status of currently installed modules and manifests/init.pp
 
-        ./toast.sh status
+        ./toast status
 
 To cleanup the modules directory, the Puppetfile and manifests/init.pp (Beware all the existing changes will be wiped off)
 
-        ./toast.sh clean
+        ./toast clean
 
 
 ## CAVEATS

@@ -1,15 +1,10 @@
-# Default manifest file applied to an Vagrant node
-# Add here resources, Puppet code to test and apply, samples and whatever you want on the nodes
-
-# Simple resources
-# package { 'vim': ensure => present }
-# file { 'motd':
-#   path    => '/etc/motd',
-#   content => 'Hi there',
-# }
-
-# Or full Example42 modules
-# See manifests/*.pp for amples of usage of Example42 modules
-
-# Copy and paste below... and Have Fun !
-
+class { 'mcollective':
+  stomp_host           => 'mq.example42.com',
+  stomp_user           => 'mcollective',
+  stomp_password       => 'private_server',
+  stomp_admin          => 'admin',
+  stomp_admin_password => 'private_client',
+  psk                  => 'aSecretPreSharedKey',
+  install_client       => false,
+  install_stomp_server => true,
+}
