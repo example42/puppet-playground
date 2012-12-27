@@ -157,6 +157,17 @@ To cleanup the whole playground (Beware all the existing changes will be wiped o
 To run puppi commands on all the active boxes (note: Puppi must included in the playground)
 
         ./play puppi check
+        ./play puppi info packages
+
+Basically **./play puppi $*** does a **puppi $*** on all the running VMs
+
+Similarly you can run puppet module commands:
+
+        ./play forge list
+        ./play forge search apt
+        ./play forge install puppetlabs-apt
+
+Here with **./play forge $*** you execute **puppet module $* --modulepath modules/**
 
 
 ## CAVEATS

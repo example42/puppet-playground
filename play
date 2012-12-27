@@ -54,8 +54,8 @@ run_puppi() {
 }
 
 run_forge() {
-  echo_title "Executing: puppet module $forge_action --modulepath=modules/"
-  puppet module $forge_action --modulepath=modules/
+  echo_title "Executing: puppet module $forge_action --modulepath modules/"
+  puppet module $forge_action --modulepath modules/
 }
 
 setup_example42() {
