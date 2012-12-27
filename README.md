@@ -33,9 +33,13 @@ You can add the modules you want in puppet-playground/modules. For this you have
 
         puppet module install <modulename>  --modulepath modules/
 
-So, for example:
+So, for example you can type:
 
         puppet module install puppetlabs-apache  --modulepath modules/
+
+which is exactly the same of:
+
+        ./play forge install puppetlabs-apache
 
 
   **3** - If you want to test the NextGen Example42 modules you can just type
