@@ -4,18 +4,19 @@ toasterdir='toasters/'
 
 showhelp () {
 cat << EOF
-Play with Puppet code.
-Your playground is the modules directory, Puppetfile and manifests/init.pp 
+Play in Puppet Playground.
 
 Usage: $0 <action> [argument]
-$0 list              - List available toasters 
-$0 install <toaster> - Install the specified toaster on the playground
-$0 status            - Show active playground status
-$0 run               - Run current playground
-$0 clean             - Clean up the playground
-$0 setup example42   - Install the full Example42 modules set
-$0 forge <command>   - Execute puppet module commands
-$0 puppi <command>   - Execute puppi commands on running boxes
+$0 status                - Show active playground status
+$0 list                  - List available toasters
+$0 install <toaster>     - Install the specified toaster on the playground
+$0 import <toaster_path> - Import a toaster from the specified path
+$0 run                   - Run Puppet on current playground
+$0 clean                 - Clean up the playground
+$0 setup default         - Reinstall the default Vagrantfile (puppet files not touched)
+$0 setup example42       - Install the full Example42 modules set in modules
+$0 forge <command>       - Execute puppet module commands to interact with puppetForge
+$0 puppi <command>       - Execute puppi commands on the running boxes
 EOF
 }
 
@@ -28,15 +29,35 @@ echo_title () {
  $SETCOLOR_BOLD ; echo $1 ; $SETCOLOR_NORMAL
 }
 
+ask_confirm () {
+cat << EOF
+I'm going to wipe out the current Playground:
+- modules/ directory
+- manifests/init.pp
+- Puppetfile
+- Vagrantfile (optionally)
+
+Do you really want to destroy the Playground? (y/N)
+Answer NO if you have valuable changes in those files.
+EOF
+
+  read answer
+  [ "x$answer" == "xy" ] || exit 3
+}
+
 list_toaster() {
   echo_title "Available toasters for $0 install"
   ls -1 $toasterdir
 }
 
 install_toaster() {
-  echo_title "Placing toaster files in the Playground"  
-  cp -f $toasterdir/$toaster/Puppetfile Puppetfile
-  cp -f $toasterdir/$toaster/init.pp manifests/init.pp
+  ask_confirm
+
+  echo_title "Installing toaster $1 in the Playground"
+  cp -f $1/Puppetfile Puppetfile
+  cp -f $1/init.pp manifests/init.pp
+  [ -f $1/Vagrantfile ] && cp -f $1/Vagrantfile Vagrantfile
+
   echo_title "Running librarian-puppet install"  
   librarian-puppet install
 }
@@ -47,8 +68,9 @@ run_playground() {
 }
 
 run_puppi() {
-  echo_title "Running puppi $puppi_action on the boxes in the playground"
+  echo_title "Running puppi $puppi_action on the active boxes of the Playground"
   for vm in $(vagrant status | grep 'running$' | cut -d ' ' -f 1 ) ; do
+    echo_title "puppi check on $vm"
     vagrant ssh $vm -c "sudo puppi $puppi_action"
   done
 }
@@ -64,16 +86,18 @@ setup_example42() {
   git clone --recursive https://github.com/example42/puppet-modules-nextgen.git modules
 }
 
+setup_default() {
+  echo_title "Recovering default Vagrantfile"
+  cp -f Vagrantfile.default Vagrantfile
+}
+
 clean() {
-  echo "I'm going to wipe out the Playground: the modules/ dir, manifests/init.pp and Puppetfile... Are you Sure? (y/N)"
-  read answer
-  if [ "x$answer" == "xy" ] ; then
-    echo_title "Removing modules dir, manifests/init.pp and Puppetfile from the Playground"
-    rm -rf modules/
-    rm -f Puppetfile
-    rm -f Puppetfile.lock
-    rm -f manifests/init.pp
-  fi
+  ask_confirm
+  echo_title "Removing modules dir, manifests/init.pp and Puppetfile from the Playground"
+  rm -rf modules/
+  rm -f Puppetfile
+  rm -f Puppetfile.lock
+  rm -f manifests/init.pp
 }
 
 status() {
@@ -88,6 +112,9 @@ status() {
   
   echo_title "Content of manifests/init.pp"
   cat manifests/init.pp
+
+  echo_title "Vagrant Status"
+  vagrant status
 }
 
 while [ $# -gt 0 ]; do
@@ -109,9 +136,19 @@ while [ $# -gt 0 ]; do
       toaster=$2
       shift 2
       ;;
+    import)
+      action=$1
+      toaster_path=$2
+      shift 2
+      ;;
     run)
       action=$1
       shift 1
+      ;;
+    import)
+      action=$1
+      import_path=$2
+      shift 2
       ;;
     setup)
       action=$1
@@ -139,7 +176,8 @@ done
 
 case $action in 
   list) list_toaster ;;
-  install) install_toaster ;;
+  install) install_toaster $toasterdir/$toaster ;;
+  import) install_toaster $toaster_path ;;
   clean) clean ;;
   status) status ;;
   run ) run_playground ;;
