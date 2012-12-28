@@ -2,25 +2,38 @@
 
 Welcome to the Puppet Playground where you can play with Puppet and also do some serious stuff.
 
-It's basically a Vagrant multi vm environment setup where you can easily test Puppet code on different OS.
+It's basically:
 
-Vagrant base boxes urls have been retrieved from Internet sources like [VagrantBox.es](http://www.vagrantbox.es/).
+  - a Vagrant multi vm environment (*) optimized, by default, for Puppet testing on different OS
 
+  - a play command that makes things easier and installs appliances (toasters) based on librarian-puppet
+
+
+(*) Vagrant base boxes urls have been retrieved from Internet sources like [VagrantBox.es](http://www.vagrantbox.es/).
 To remove, fix or add entries please send pull requests for [Vagrantfile](https://github.com/example42/puppet-playground/blob/master/Vagrantfile).
+
 
 ## INSTALLATION
 
 Clone this repo to a work directory of your choice (here puppet-playground): 
 
-        git clone https://github.com/example42/puppet-playground.git puppet-playground
-        
-This creates a multi vm vagrant environment 
+    git clone https://github.com/example42/puppet-playground.git puppet-playground
+    
+Move into the newly created directory, from this point all commands are relative to this path:
 
-        cd puppet-playground
-        vagrant status
+    cd puppet-playground
 
-This is enough to play with Puppet in Masterless mode: default manifest is **[manifests/init.pp](https://github.com/example42/puppet-playground/blob/master/manifests/init.pp)**, modules are in **modules/**.
+What you have is a normal Vagrant multi VM environment:
 
+    vagrant status
+
+This is enough to play with Puppet in Masterless mode:
+default manifest is **[manifests/init.pp](https://github.com/example42/puppet-playground/blob/master/manifests/init.pp)**,
+modules are in **modules/**.
+
+To show the status of the Puppet Playground
+
+    ./play status
 
 ## WORK WITH MODULES
 
@@ -31,103 +44,150 @@ You can add the modules you want in puppet-playground/modules. For this you have
 
   **2** - If you want to test modules from the **Puppet Forge** you can install them with:
 
-        puppet module install <modulename>  --modulepath modules/
+    puppet module install <modulename>  --modulepath modules/
 
 So, for example you can type:
 
-        puppet module install puppetlabs-apache  --modulepath modules/
+    puppet module install puppetlabs-apache  --modulepath modules/
 
 which is exactly the same of:
 
-        ./play forge install puppetlabs-apache
+    ./play forge install puppetlabs-apache
 
 
   **3** - If you want to test the NextGen Example42 modules you can just type
  
-        ./play setup example42
+    ./play setup example42
 
 This initializes the modules dir with the Example42 NextGen modules, directly cloned from GitHub.
 
-  **4** - If you want to **test your own modules** just place them in the modules dir
+  **4** - If you want to **test your own modules** just place them in the modules dir, one module per directory, as you would do in your puppet master.
 
-  **5** - If you want to **test librarian-puppet toasters** use the play command (see below) 
+  **5** - If you want to **play with toasters**, install **librarian-puppet toasters** and use the play command (more details below) 
 
-        gem install librarian-puppet
-        ./play
+    gem install librarian-puppet
+    ./play list
+    ./play install <toaster>
   
   
 ## VAGRANT USAGE
 
-Review, if you want, the Vagrantfile in puppet-playground and show the available OS
+Whatever method you use to populate the modules’ directory, you can test your Puppet code using Vagrant commands. First, review (if you want) the default Vagrantfile provided by puppet-playground. You will see a normal MultiVM setup with masterless Puppet integration.
 
-        cat Vagrantfile
-        vagrant status
+    cat Vagrantfile
 
-Edit and play with the Puppet manifest applied on the boxes
+You can see the available VMs with:
 
-        vi manifests/init.pp
-        
-This is your test playground, add resources, use modules, declare classes... 
+    vagrant status
 
-For sample code that uses Example42 modules, look at the other files in **manifest/*.pp**.
+Expect an output like the one below:
 
-See how your code behaves on the selected test box:
+    Current VM states:
+ 
+    Test_Centos6_64      not created
+    Test_Ubuntu1204_64       not created
+    Test_Ubuntu1004_64       not created
+    Test_Ubuntu1004_32       not created
+    Test_Debian6_64      not created
+    Test_SuseLinux11_64      not created
+    Test_OpenSuse12_64       not created
+    ToFix_Solaris10_64       not created
+    ToFix_FreeBSD9_64    not created
+    ToFix_OpenBSD5_64    not created
+    ToFix_Centos5_64     not created
+    ToFix_Centos5_32     not created
+    ToFix_Centos4_64     not created
+    ToFix_Ubuntu1104_64      not created
+    ToFix_RedHat6_64     not created
+    ToFix_ScientificLinux6_64not created
 
-        vagrant up Test_Centos6_64
+Boxes with the Test_ prefix have successfully been tested on an updated Vagrant/VirtualBox installation, the ones with ToFix_ have had some problem for a smooth automated Puppet run. This list is going to be updated and corrected with time, hopefully with the help of the community.
 
-This may take a while, the first time, to download the box.
+You can run any of the provided Vagrant boxes with:
 
-Once created the VM connect to it with:
+    vagrant up Test_Centos6_64
 
-        vagrant ssh Test_Centos6_64
+This may take some minutes, the first time you run it, to download the base box from the Internet.
 
-To exit form the shell on the VM
+Once created the VM, you can connect to it with:
 
-        vm# exit
+    vagrant ssh Test_Centos6_64
+
+Note that at the moment headless mode is disabled, so you’ll see the VirtualBox console window pop up. If you encounter problems with ssh, you should be able to login with user ‘vagrant’ and password ‘vagrant’ and then sudo -s.
+
+To exit from the shell on the VM
+
+    vm# exit
 
 To restart your VM:
 
-        vagrant reload Test_Centos6_64
+    vagrant reload Test_Centos6_64
 
-To destroy and rebuild from scratch
+To destroy and rebuild from scratch:
 
-        vagrant destroy Test_Centos6_64
-        vagrant up Test_Centos6_64
+    vagrant destroy Test_Centos6_64
+    vagrant up Test_Centos6_64
 
 
 ## WORK WITH PUPPET
 
-You can test and apply code directly from the VM:
+Once you see that Vagrant is doing its job, you can start to play with Puppet code: edit the default Puppet manifest applied on the boxes:
 
-        vagrant ssh Test_Centos6_64
+    vi manifests/init.pp
 
-From a shell on the VM get the superpowers and move to vagrant configs:
+This is your test playground: add resources, use modules, declare classes…
+You can place simple resources like:
 
-        vm# sudo -s
-        vm# cd /tmp/vagrant-puppet/
+    file { 'motd':
+      path    => '/etc/motd',
+      content => 'Hi there',
+    }
 
-To try some Puppet code edit the manifest file:
+Or use modules you’ve previously placed in the modules/ dir.
 
-        vm# vi manifests/init.pp
-        
-You can work on it both from your system and the VM.
+    class { 'wordpress':
+    }
 
-On your system is in **puppet-playground/manifests/init.pp**
+Or whatever Puppet code you might want to apply.
 
-On the VM is available at **/tmp/vagrant-puppet/manifests/init.pp** 
+If you need to provide custom files, the sanest approach is to place them in the templates directory of a custom “site” module (call it ‘site’ or however you want) and refer to it using the content parameter:
 
-From the VM you can run a **test** with:
+    file { 'motd':
+      path    => '/etc/motd',
+      content => template('site/motd'),
+    }
 
-        vm# puppet apply -v --modulepath '/tmp/vagrant-puppet/modules-0' --pluginsync /tmp/vagrant-puppet/manifests/init.pp
+This will populate /etc/motd with the template placed in 
+puppet-playground/modules/site/templates/motd.
 
-From your host:
+To test your code’s changes on a single node, you have two alternatives:
 
-        vagrant provision Test_Centos6_64
+From your host, in the puppet-playground directory:
 
-To test the code on all the running nodes
+    vagrant provision Test_Centos6_64
 
-        vagrant provision
-        
+From the VM you have created:
+
+    vagrant ssh Test_Centos6_64
+
+Once you’ve logged in the VM, get the superpowers and run Puppet:
+
+    vm# sudo -s
+    vm# puppet apply -v --modulepath '/tmp/vagrant-puppet/modules-0' --pluginsync /tmp/vagrant-puppet/manifests/init.pp
+
+You can also edit the manifests file both from your host or inside a VM:
+
+From your host (having your cwd in puppet-playground directory):
+    vi manifests/init.pp
+
+From the VM (once connected via ssh):
+    vm# sudo -s
+    vm# cd /tmp/vagrant-puppet/
+    vm# vi manifests/init.pp
+
+If you have more VMs active you can test your changes on all of them with a simple:
+    vagrant provision
+
 
 ## PLAY IN THE PLAYGROUND
 
@@ -136,38 +196,50 @@ It manages the Puppet Playground, namely the default manifest, located in **mani
 
 To show the status of the playground
 
-        ./play status
+    ./play status
 
 To show the available toasters for ./play install:
 
-        ./play list
+    ./play list
 
 To install a specific toaster via librarian-puppet :
 
-        ./play install garethr-riemann
+    ./play install garethr-riemann
+
+To import an external toaster (must have Puppetfile and init.pp, might have a custom Vagrantfile)
+
+   ./play import /home/al/vagrant/my-appliance
 
 To run the current playground (same as vagrant provision)
 
-        ./play run
+    ./play run
 
 To cleanup the whole playground (Beware all the existing changes will be wiped off)
 
-        ./play clean
+    ./play clean
 
 To run puppi commands on all the active boxes (note: Puppi must included in the playground)
 
-        ./play puppi check
-        ./play puppi info packages
+    ./play puppi check
+    ./play puppi info packages
 
 Basically **./play puppi $*** does a **puppi $*** on all the running VMs
 
 Similarly you can run puppet module commands:
 
-        ./play forge list
-        ./play forge search apt
-        ./play forge install puppetlabs-apt
+    ./play forge list
+    ./play forge search apt
+    ./play forge install puppetlabs-apt
 
 Here with **./play forge $*** you execute **puppet module $* --modulepath modules/**
+
+To reinstall the default Vagrantfile (might be overrided by toasters imported or installed, if they provide it):
+
+    ./play setup default
+
+To wipe off and inizialize the modules/ directory with NextGen Example42 modules
+
+    ./play setup example42
 
 
 ## CAVEATS
@@ -179,11 +251,11 @@ provide not updated Vagrant configurations.
 
 If you find errors like:
 
-        /Users/al/.vagrant.d/boxes/solaris10_64/include/_Vagrantfile:7: undefined method `system=' for #<Vagrant::Config::VMConfig:0x1025fc5a0> (NoMethodError)
+    /Users/al/.vagrant.d/boxes/solaris10_64/include/_Vagrantfile:7: undefined method `system=' for #<Vagrant::Config::VMConfig:0x1025fc5a0> (NoMethodError)
 
 Try to remove or delete the referred file:
 
-        mv /Users/al/.vagrant.d/boxes/solaris10_64/include/_Vagrantfile /Users/al/.vagrant.d/boxes/solaris10_64/include/_Vagrantfile.bak
+    mv /Users/al/.vagrant.d/boxes/solaris10_64/include/_Vagrantfile /Users/al/.vagrant.d/boxes/solaris10_64/include/_Vagrantfile.bak
 
 Some boxes (currently the ones with the ToFix prefix) are not fully working for Puppet provisioning. 
 
