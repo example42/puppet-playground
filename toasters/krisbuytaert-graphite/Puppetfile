@@ -34,7 +34,7 @@ mod 'KrisBuytaert/jgdash',
 	:git => 'https://github.com/KrisBuytaert/puppet-gdash.git'
 
 mod 'vstone/apache',
-	:git => 'https://github.com/example42/puppet-apache-1.git'
+	:git => 'https://github.com/vStone/puppet-apache.git'
 
 mod 'KrisBuytaert/jrsyslog',
 	:git => 'https://github.com/KrisBuytaert/puppet-rsyslog.git'

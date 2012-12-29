@@ -111,6 +111,11 @@ clean() {
   rm -f Puppetfile.lock
 }
 
+clean_librarian() {
+  echo_title "Executing librarian-puppet clean"
+  librarian-puppet clean
+}
+
 status() {
   echo_title "Modules status (puppet module list --modulepath=modules/) "
   puppet module list --modulepath=modules/
@@ -192,7 +197,7 @@ case $action in
   list) list_toaster ;;
   install) install_toaster $toasterdir/$toaster ;;
   import) install_toaster $toaster_path ;;
-  clean) clean ;;
+  clean) clean ; clean_librarian ;;
   status) status ;;
   run ) run_playground ;;
   setup ) setup_$setup_action ;;
