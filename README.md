@@ -13,7 +13,7 @@ It's basically:
 To remove, fix or add entries please send pull requests for [Vagrantfile](https://github.com/example42/puppet-playground/blob/master/Vagrantfile).
 
 
-## INSTALLATION
+## Installation
 
 Clone this repo to a work directory of your choice (here puppet-playground): 
 
@@ -35,12 +35,13 @@ To show the status of the Puppet Playground
 
     ./play status
 
-## WORK WITH MODULES
+## Install modules and toasters
 
 You can add the modules you want in puppet-playground/modules. For this you have various alternatives:
 
   **1** - If you want to **quick test Puppet resources** without using modules just write your Puppet code in **manifests/init.pp** (see below). 
 
+    vi manifests/init.pp
 
   **2** - If you want to test modules from the **Puppet Forge** you can install them with:
 
@@ -53,7 +54,6 @@ So, for example you can type:
 which is exactly the same of:
 
     ./play forge install puppetlabs-apache
-
 
   **3** - If you want to test the NextGen Example42 modules you can just type
  
@@ -70,9 +70,9 @@ This initializes the modules dir with the Example42 NextGen modules, directly cl
     ./play install <toaster>
   
   
-## VAGRANT USAGE
+## Vagrant Usage
 
-Whatever method you use to populate the modules’ directory, you can test your Puppet code using Vagrant commands. First, review (if you want) the default Vagrantfile provided by puppet-playground. You will see a normal MultiVM setup with masterless Puppet integration.
+Whatever method you use to populate the modules’ directory and the default manifest file, you can test your Puppet code on the running Vagrant boxes. First, review (if you want) the default Vagrantfile provided by puppet-playground. You will see a normal MultiVM setup with masterless Puppet integration
 
     cat Vagrantfile
 
@@ -84,24 +84,24 @@ Expect an output like the one below:
 
     Current VM states:
  
-    Test_Centos6_64      not created
+    Test_Centos6_64          not created
     Test_Ubuntu1204_64       not created
     Test_Ubuntu1004_64       not created
     Test_Ubuntu1004_32       not created
-    Test_Debian6_64      not created
+    Test_Debian6_64          not created
     Test_SuseLinux11_64      not created
     Test_OpenSuse12_64       not created
     ToFix_Solaris10_64       not created
-    ToFix_FreeBSD9_64    not created
-    ToFix_OpenBSD5_64    not created
-    ToFix_Centos5_64     not created
-    ToFix_Centos5_32     not created
-    ToFix_Centos4_64     not created
+    ToFix_FreeBSD9_64        not created
+    ToFix_OpenBSD5_64        not created
+    ToFix_Centos5_64         not created
+    ToFix_Centos5_32         not created
+    ToFix_Centos4_64         not created
     ToFix_Ubuntu1104_64      not created
-    ToFix_RedHat6_64     not created
+    ToFix_RedHat6_64         not created
     ToFix_ScientificLinux6_64not created
 
-Boxes with the Test_ prefix have successfully been tested on an updated Vagrant/VirtualBox installation, the ones with ToFix_ have had some problem for a smooth automated Puppet run. This list is going to be updated and corrected with time, hopefully with the help of the community.
+Boxes with the Test_ prefix have successfully been tested on an updated Vagrant/VirtualBox installation, the ones with ToFix_ have had some problem for a smooth automated Puppet run. This list is going to be updated and corrected.
 
 You can run any of the provided Vagrant boxes with:
 
@@ -129,7 +129,7 @@ To destroy and rebuild from scratch:
     vagrant up Test_Centos6_64
 
 
-## WORK WITH PUPPET
+## Work with Puppet
 
 Once you see that Vagrant is doing its job, you can start to play with Puppet code: edit the default Puppet manifest applied on the boxes:
 
@@ -157,8 +157,7 @@ If you need to provide custom files, the sanest approach is to place them in the
       content => template('site/motd'),
     }
 
-This will populate /etc/motd with the template placed in 
-puppet-playground/modules/site/templates/motd.
+This will populate /etc/motd with the template placed in **puppet-playground/modules/site/templates/motd**.
 
 To test your code’s changes on a single node, you have two alternatives:
 
@@ -178,18 +177,21 @@ Once you’ve logged in the VM, get the superpowers and run Puppet:
 You can also edit the manifests file both from your host or inside a VM:
 
 From your host (having your cwd in puppet-playground directory):
+
     vi manifests/init.pp
 
 From the VM (once connected via ssh):
+
     vm# sudo -s
     vm# cd /tmp/vagrant-puppet/
     vm# vi manifests/init.pp
 
 If you have more VMs active you can test your changes on all of them with a simple:
+
     vagrant provision
 
 
-## PLAY IN THE PLAYGROUND
+## Play in the Playground
 
 Many of the activities described before can be done and automated with the play command.
 It manages the Puppet Playground, namely the default manifest, located in **manifests/init.pp** , the **Puppetfile** and the content of the **modules/** directory.
@@ -208,7 +210,7 @@ To install a specific toaster via librarian-puppet :
 
 To import an external toaster (must have Puppetfile and init.pp, might have a custom Vagrantfile)
 
-   ./play import /home/al/vagrant/my-appliance
+    ./play import /home/al/vagrant/my-appliance
 
 To run the current playground (same as vagrant provision)
 
@@ -242,7 +244,31 @@ To wipe off and inizialize the modules/ directory with NextGen Example42 modules
     ./play setup example42
 
 
-## CAVEATS
+## Write you own toaster
+
+A toaster is just a **directory **that contains these files:
+
+ 1 - The **default manifest** with the Puppet code that is needed for your appliance setup.
+   Here you don't need to define nodes, just variables (they are treated as top scope) and resources.  
+
+    init.pp
+
+ 2 - A [Librarian Puppet](http://librarian-puppet.com/) formatted **Puppetfile**
+
+    Puppetfile
+
+ 3 - An **optional** custom **Vagrantfile** (with tested VMs are relevant settings)
+
+    Vagrantfile
+
+To import your toaster in the Playground just type
+
+    ./play import /path/to/my/toaster
+
+But if you think that it can be useful to others, please add it to the [toasters] directory (https://github.com/example42/puppet-playground/blob/master/toasters/) and make a pull request: your toaster will be available to everybody out of the box .
+
+
+## Caveats
 
 ### Broken Vagrant Boxes
 
@@ -267,14 +293,17 @@ The cohexistence of different ways to manage the modules directory (with puppet 
 Start from an empty modules dir to have a clean setup good for every use.
 
 
-## SUPPORT AND BUGS
+## Support and Bugs
 
 Please submit bug filings, pull requests and suggestions via GitHub.
 
 This Puppet Playground might become more and more useful if:
 
-  - More Working vagrant Boxes are provided for different OS
+  - More Working vagrant Boxes are provided for different OS. You can add them to [Vagrantfile](https://github.com/example42/puppet-playground/blob/master/Vagrantfile)
 
-  - More toasters are provided that use different modules sets with librarian-puppet
+  - New toasters are provided that use different modules sets with librarian-puppet. Added them to [toasters] directory (https://github.com/example42/puppet-playground/blob/master/toasters/)
 
-Any contribution to these is very welcomed.
+  - New ideas and integrations are delivered (ie: Travis, Jenkins for automatic checks of deployed toasters)
+
+Any contribution is very welcomed: the Playground is funnier if there are more kids around ;-)
+

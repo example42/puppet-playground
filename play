@@ -35,7 +35,7 @@ I'm going to wipe out the current Playground:
 - modules/ directory
 - manifests/init.pp
 - Puppetfile
-- Vagrantfile (optionally)
+- Vagrantfile (if provided)
 
 Do you really want to destroy the Playground? (y/N)
 Answer NO if you have valuable changes in those files.
