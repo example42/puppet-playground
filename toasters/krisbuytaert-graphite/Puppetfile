@@ -1,0 +1,40 @@
+forge 'http://forge.puppetlabs.com'
+
+mod 'KrisBuytaert/logster',
+	:git => 'https://github.com/KrisBuytaert/puppet-logster.git'
+
+mod 'KrisBuytaert/graphite',
+	:git => 'https://github.com/KrisBuytaert/puppet-graphite.git'
+
+mod 'KrisBuytaert/jmxtrans',
+	:git => 'https://github.com/KrisBuytaert/puppet-jmxtrans.git'
+
+mod 'KrisBuytaert/jcollectd',
+	:git => 'https://github.com/KrisBuytaert/puppet-collectd.git'
+
+mod 'KrisBuytaert/jstatsd',
+	:git => 'https://github.com/KrisBuytaert/puppet-statsd.git'
+
+mod 'KrisBuytaert/jtattle',
+	:git => 'https://github.com/KrisBuytaert/puppet-tattle.git'
+
+mod 'ripienaar/concat',
+	:git => 'https://github.com/ripienaar/puppet-concat.git'
+
+mod 'UnifiedPost/passenger',
+	:git => 'https://github.com/UnifiedPost/puppet-passenger.git'
+
+mod 'simonsd/ruby',
+	:git => 'https://github.com/simonsd/puppet-ruby.git'
+
+mod 'KrisBuytaert/jtmpwatch',
+	:git => 'https://github.com/KrisBuytaert/puppet-tmpwatch.git'
+
+mod 'KrisBuytaert/jgdash',
+	:git => 'https://github.com/KrisBuytaert/puppet-gdash.git'
+
+mod 'vstone/apache',
+	:git => 'https://github.com/example42/puppet-apache-1.git'
+
+mod 'KrisBuytaert/jrsyslog',
+	:git => 'https://github.com/KrisBuytaert/puppet-rsyslog.git'

@@ -3,5 +3,5 @@
 .tmp/
 /manifests/
 /modules/
-Puppetfile.lock
-Puppetfile
+/Puppetfile.lock
+/Puppetfile
