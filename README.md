@@ -72,7 +72,7 @@ This initializes the modules dir with the Example42 NextGen modules, directly cl
   
 ## Vagrant Usage
 
-Whatever method you use to populate the modules’ directory and the default manifest file, you can test your Puppet code on the running Vagrant boxes. First, review (if you want) the default Vagrantfile provided by puppet-playground. You will see a normal MultiVM setup with masterless Puppet integration
+Whatever method you use to populate the modules’ directory and the default manifest directory, you can test your Puppet code on the running Vagrant boxes. First, review (if you want) the default Vagrantfile provided by puppet-playground. You will see a normal MultiVM setup with masterless Puppet integration
 
     cat Vagrantfile
 
@@ -194,7 +194,7 @@ If you have more VMs active you can test your changes on all of them with a simp
 ## Play in the Playground
 
 Many of the activities described before can be done and automated with the play command.
-It manages the Puppet Playground, namely the default manifest, located in **manifests/init.pp** , the **Puppetfile** and the content of the **modules/** directory.
+It manages the Puppet Playground: the **Vagrantfile**, the **Puppetfile** and the content of the **manifests** and **modules** directories.
 
 To show the status of the playground
 
@@ -248,10 +248,10 @@ To wipe off and inizialize the modules/ directory with NextGen Example42 modules
 
 A toaster is just a **directory** that contains these files:
 
- 1 - The **default manifest** with the Puppet code that is needed for your appliance setup.
-   Here you don't need to define nodes, just variables (they are treated as top scope) and resources or class declarations
+ 1 - The **manifests** directory with the Puppet code that is needed for your appliance setup.
+ By default the provided Vagrantfile uses manifests/init.pp as main manifest, but you can use a different name, al long as it's coherent with your Vagrantfile's puppet.manifest_file (if possibile keep init.pp, for easier cross testing with different Vagrant environments)
 
-    init.pp
+    manifests/
 
  2 - A [Librarian Puppet](http://librarian-puppet.com/) formatted **Puppetfile**
 
@@ -343,7 +343,7 @@ If you install or import a toaster that provides a custom Vagrantfile your runni
 
 Note that the active "old" VMs are still running and you can manage them via vagrant only reinstallling the relevant Vagrantfile on the Playground.
 
-To reinstall on the Playground the default Vagrantfile (note that this command does not change the content of modules/ Puppetfile and manifests/init.pp):
+To reinstall on the Playground the default Vagrantfile (note that this command does not change the content of modules/ Puppetfile and manifests/):
 
     ./play setup default
  

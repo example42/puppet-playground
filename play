@@ -1,22 +1,33 @@
 #!/bin/bash
 
-toasterdir='toasters/'
+if ( [ ! -f Vagrantfile ] || [ ! -d toasters ] ) ; then
+  echo "You can play only in the puppet-playground ;-!"
+  echo "Change your cwd to your cloned puppet-playground directory and then run ./play"
+  exit 1
+fi
+
+toasterdir='toasters'
 
 showhelp () {
 cat << EOF
+
 Play in Puppet Playground.
 
+This command manages the playground: Vagrantfile, Puppetfile, modules/ and manifests/
+
 Usage: $0 <action> [argument]
-$0 status                - Show active playground status
-$0 list                  - List available toasters
+$0 status                - Show playground status
+$0 list                  - List the toasters available for installation
 $0 install <toaster>     - Install the specified toaster on the playground
 $0 import <toaster_path> - Import a toaster from the specified path
-$0 run                   - Run Puppet on current playground
-$0 clean                 - Clean up the playground
-$0 setup default         - Reinstall the default Vagrantfile (puppet files not touched)
-$0 setup example42       - Install the full Example42 modules set in modules
-$0 forge <command>       - Execute puppet module commands to interact with puppetForge
-$0 puppi <command>       - Execute puppi commands on the running boxes
+$0 run                   - Run Puppet on the playground
+$0 clean                 - Clean up the playground (Puppet files, Vagrantfile not touched)
+$0 setup default         - Reinstall the default Vagrantfile (Puppet files not touched)
+$0 setup example42       - Install Example42 modules (Vagrantfile and manifests not touched)
+$0 forge <command>       - Execute puppet module \$* commands to interact with PuppetForge
+$0 puppi <command>       - Execute puppi \$* commands on the running boxes
+
+See README for more details.
 EOF
 }
 
@@ -33,7 +44,7 @@ ask_confirm () {
 cat << EOF
 I'm going to wipe out the current Playground:
 - modules/ directory
-- manifests/init.pp
+- manifests/ directory
 - Puppetfile
 - Vagrantfile (if provided)
 
@@ -55,7 +66,7 @@ install_toaster() {
 
   echo_title "Installing toaster $1 in the Playground"
   cp -f $1/Puppetfile Puppetfile
-  cp -f $1/init.pp manifests/init.pp
+  cp -fr $1/manifests . 
   [ -f $1/Vagrantfile ] && cp -f $1/Vagrantfile Vagrantfile
 
   echo_title "Running librarian-puppet install"  
@@ -95,9 +106,9 @@ clean() {
   ask_confirm
   echo_title "Removing modules dir, manifests/init.pp and Puppetfile from the Playground"
   rm -rf modules/
+  rm -rf manifests/
   rm -f Puppetfile
   rm -f Puppetfile.lock
-  rm -f manifests/init.pp
 }
 
 status() {
@@ -109,6 +120,9 @@ status() {
 
   echo_title "Content of modules/ directory "
   ls -l modules/
+
+  echo_title "Content of manifests/ directory "
+  ls -l manifests/
   
   echo_title "Content of manifests/init.pp"
   cat manifests/init.pp
