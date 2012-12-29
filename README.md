@@ -206,7 +206,7 @@ To show the available toasters for ./play install:
 
 To install a specific toaster via librarian-puppet :
 
-    ./play install garethr-riemann
+    ./play install example42-tomcat
 
 To import an external toaster (must have Puppetfile and init.pp, might have a custom Vagrantfile)
 
@@ -246,10 +246,10 @@ To wipe off and inizialize the modules/ directory with NextGen Example42 modules
 
 ## Write you own toaster
 
-A toaster is just a **directory **that contains these files:
+A toaster is just a **directory** that contains these files:
 
  1 - The **default manifest** with the Puppet code that is needed for your appliance setup.
-   Here you don't need to define nodes, just variables (they are treated as top scope) and resources.  
+   Here you don't need to define nodes, just variables (they are treated as top scope) and resources or class declarations
 
     init.pp
 
@@ -257,25 +257,65 @@ A toaster is just a **directory **that contains these files:
 
     Puppetfile
 
- 3 - An **optional** custom **Vagrantfile** (with tested VMs are relevant settings)
+ 3 - An **optional** custom **Vagrantfile** (with tested VMs and custom settings)
 
     Vagrantfile
 
 To import your toaster in the Playground just type
 
-    ./play import /path/to/my/toaster
+    ./play import /path/to/my/acme-mailscanner/
 
-But if you think that it can be useful to others, please add it to the [toasters] directory (https://github.com/example42/puppet-playground/blob/master/toasters/) and make a pull request: your toaster will be available to everybody out of the box .
+But if you think that it can be useful to others, please add it to the [toasters directory](https://github.com/example42/puppet-playground/blob/master/toasters/) and make a pull request: your toaster will be available to everybody out of the box with a simple:
+
+    ./play install acme-mailscanner
 
 
-## Caveats
+## Example42 integrations
+
+The Puppet Playground has started as a Vagrant environment where to test [Example42](http://www.example42.com) modules, as you can see, you can actually use it to test whatever kind of Puppet code and modules. Still the are some "extras" that you can have, when using Example42 modules.
+
+As seen, you can populate the modules dir with the [Example42 NextGen](https://github.com/example42/puppet-modules-nextgen) modules with
+
+    ./play setup example42
+
+You can also test a more restricted set of modules with the provided Example42 toasters
+
+    ./play install example42-jboss
+
+And you can play with puppi and automatic monitoring if you use Example42 modules or toasters.
+
+In the manifest/init.pp be sure to have these topscope variables (you can pass the same values as class parameters):
+
+    $puppi        = true
+    $monitor      = true
+    $monitor_tool = [ 'puppi' ]
+
+Note that on RedHat and derivatives you also need the EPEL repository installed.
+You can provided it with Example42's yum module:
+
+    include yum
+
+Once you've run puppet on the active boxes you can do interesting things with puppi, like verifying if the services provided by Puppet are actually up and running:
+
+    ./play puppi check
+
+or, deploy a custom application (configured with puppi in your manifests/init.pp) on all the running Vagrant boxes:
+
+    ./play puppi deploy my_app
+
+or view from them realtime infos like:
+
+    ./play puppi info network
+
+
+## Caveats and things to know
 
 ### Broken Vagrant Boxes
 
 Not all the Vagrant boxes have been widely tested, they have probably old versions of the VirtualBox Guest Additions and maybe 
 provide not updated Vagrant configurations.
 
-If you find errors like:
+If, during a vagrant up you find errors like:
 
     /Users/al/.vagrant.d/boxes/solaris10_64/include/_Vagrantfile:7: undefined method `system=' for #<Vagrant::Config::VMConfig:0x1025fc5a0> (NoMethodError)
 
@@ -283,7 +323,7 @@ Try to remove or delete the referred file:
 
     mv /Users/al/.vagrant.d/boxes/solaris10_64/include/_Vagrantfile /Users/al/.vagrant.d/boxes/solaris10_64/include/_Vagrantfile.bak
 
-Some boxes (currently the ones with the ToFix prefix) are not fully working for Puppet provisioning. 
+Some boxes (currently the ones with the ToFix prefix) are not fully working for Puppet provisioning: leave them off if they block serial operations on all the active VMs.
 
 
 ### Modules directory
@@ -291,6 +331,25 @@ Some boxes (currently the ones with the ToFix prefix) are not fully working for 
 The cohexistence of different ways to manage the modules directory (with puppet module tool, with the Example42 NextGen git repo, with custom modules r via librarian-puppet) may create inconsistent status, if you mix these methods.
 
 Start from an empty modules dir to have a clean setup good for every use.
+
+
+### Vagrantfile
+
+Currently a default Vagrantfile is provided but can be overrided by a different one provided by a toaster.
+
+The idea is to keep the default one multi-purpose, multi-os and well tested and leave the option to provide alternative Vagrantfiles via toasters.
+
+If you install or import a toaster that provides a custom Vagrantfile your running VMs will "disappear" from the playground and the new one(s) of the toaster will show up.
+
+Note that the active "old" VMs are still running and you can manage them via vagrant only reinstallling the relevant Vagrantfile on the Playground.
+
+To reinstall on the Playground the default Vagrantfile (note that this command does not change the content of modules/ Puppetfile and manifests/init.pp):
+
+    ./play setup default
+ 
+To (re)install on the Playground a Vagrantfile from a toaster (this will override also the Puppet configurations)
+
+    ./play install toaster_name
 
 
 ## Support and Bugs
