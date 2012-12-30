@@ -1,257 +1,56 @@
 Vagrant::Config.run do |config|
 
-  # Centos
-  config.vm.define :Test_Centos6_64 do |local|
-    local.vm.box = "centos6_64"
-    local.vm.boot_mode = :gui
-    local.vm.box_url = "https://dl.dropbox.com/u/7225008/Vagrant/CentOS-6.3-x86_64-minimal.box"
-    local.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.manifest_file  = "init.pp"
-      puppet.module_path = "modules"
-      puppet.options = [
-      '--verbose',
-#      '--debug',    
-      ]
+  {
+    :Centos6_64 => {
+      :box     => 'centos6_64',
+      :box_url => 'https://dl.dropbox.com/u/7225008/Vagrant/CentOS-6.3-x86_64-minimal.box',
+    },
+    :Centos63_64 => {
+      :box     => 'centos-6.3-64bit',
+      :box_url => 'http://packages.vstone.eu/vagrant-boxes/centos-6.3-64bit-latest.box',
+    },
+    :Centos58_64 => {
+      :box     => 'centos-5.8-64bit',
+      :box_url => 'http://packages.vstone.eu/vagrant-boxes/centos-5.8-64bit-latest.box',
+    },
+    :Ubuntu1204_64 => {
+      :box     => 'precise64',
+      :box_url => 'http://files.vagrantup.com/precise64.box',
+    },
+    :Ubuntu1004_64 => {
+      :box     => 'lucid64',
+      :box_url => 'http://files.vagrantup.com/lucid64.box',
+    },
+    :Ubuntu1004_32 => {
+      :box     => 'lucid32',
+      :box_url => 'http://files.vagrantup.com/lucid32.box',
+    },
+    :Debian6_64 => {
+      :box     => 'squeeze64',
+      :box_url => 'http://puppetlabs.s3.amazonaws.com/pub/squeeze64.box',
+    },
+    :SuseLinux11_64 => {
+      :box     => 'sles11sp1_64',
+      :box_url => 'http://puppetlabs.s3.amazonaws.com/pub/sles11sp1_64.box',
+    },
+    :OpenSuse12_64 => {
+      :box     => 'OpenSuse12_1x64_July14',
+      :box_url => 'https://s3.amazonaws.com/circlejtp/OpenSuseVagrant/OpenSuse12_1x64_July14.box',
+    },
+  }.each do |name,cfg|
+    config.vm.define name do |local|
+      local.vm.box = cfg[:box]
+      local.vm.box_url = cfg[:box_url]
+#      local.vm.boot_mode = :gui
+      local.vm.provision :puppet do |puppet|
+        puppet.manifests_path = "manifests"
+        puppet.module_path = "modules"
+        puppet.manifest_file = "init.pp"
+        puppet.options = [
+         '--verbose',
+  #      '--debug',
+        ]
+      end
     end
   end
-
-  # Ubuntu
-  config.vm.define :Test_Ubuntu1204_64 do |local|
-    local.vm.box = "precise64"
-    local.vm.box_url = "http://files.vagrantup.com/precise64.box"
-    local.vm.boot_mode = :gui
-    local.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.module_path = "modules"
-      puppet.manifest_file = "init.pp"
-      puppet.options = [
-      '--verbose',
-#      '--debug',
-      ]
-    end
-  end
-
-  config.vm.define :Test_Ubuntu1004_64 do |local|
-    local.vm.box = "lucid64"
-    local.vm.box_url = "http://files.vagrantup.com/lucid64.box"
-    local.vm.boot_mode = :gui
-    local.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.module_path = "modules"
-      puppet.manifest_file = "init.pp"
-      puppet.options = [
-      '--verbose',
-#      '--debug',
-      ]
-    end
-  end
-
-  config.vm.define :Test_Ubuntu1004_32 do |local|
-    local.vm.box = "lucid32"
-    local.vm.box_url = "http://files.vagrantup.com/lucid32.box"
-    local.vm.boot_mode = :gui
-    local.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.module_path = "modules"
-      puppet.manifest_file = "init.pp"
-      puppet.options = [
-      '--verbose',
-#      '--debug',
-      ]
-    end
-  end
-
-
-  # Debian
-  config.vm.define :Test_Debian6_64 do |local|
-    local.vm.box = "squeeze64"
-    local.vm.box_url = "http://puppetlabs.s3.amazonaws.com/pub/squeeze64.box"
-    local.vm.boot_mode = :gui
-    local.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.module_path = "modules"
-      puppet.manifest_file = "init.pp"
-      puppet.options = [
-      '--verbose',
-#      '--debug',
-      ]
-    end
-  end
-
-  # Suse Linux
-  config.vm.define :Test_SuseLinux11_64 do |local|
-    local.vm.box = "sles11sp1_64"
-    local.vm.box_url = "http://puppetlabs.s3.amazonaws.com/pub/sles11sp1_64.box"
-    local.vm.boot_mode = :gui
-    local.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.module_path = "modules"
-      puppet.manifest_file = "init.pp"
-      puppet.options = [
-      '--verbose',
-#      '--debug',
-      ]
-    end
-  end
-
-  config.vm.define :Test_OpenSuse12_64 do |local|
-    local.vm.box = "OpenSuse12_1x64_July14"
-    local.vm.box_url = "https://s3.amazonaws.com/circlejtp/OpenSuseVagrant/OpenSuse12_1x64_July14.box"
-    local.vm.boot_mode = :gui
-    local.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.module_path = "modules"
-      puppet.manifest_file = "init.pp"
-      puppet.options = [
-      '--verbose',
-#      '--debug',
-      ]
-    end
-  end
-
-
-  # The following boxes have probles either on SSH or in shared folders or in Puppet support
-
-  # Solaris
-  config.vm.define :ToFix_Solaris10_64 do |local|
-    local.vm.box = "solaris10_64"
-    local.vm.box_url = "http://puppetlabs.s3.amazonaws.com/pub/solaris10_64.box"
-    local.vm.boot_mode = :gui
-    local.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.module_path = "modules"
-      puppet.manifest_file = "init.pp"
-      puppet.options = [
-      '--verbose',
-#      '--debug',
-      ]
-    end
-  end
-
-  # *BSD
-  config.vm.define :ToFix_FreeBSD9_64 do |local|
-    local.vm.box = "freebsd_amd64_zfs"
-    local.vm.box_url = "https://github.com/downloads/xironix/freebsd-vagrant/freebsd_amd64_zfs.box"
-    local.vm.boot_mode = :gui
-    local.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.module_path = "modules"
-      puppet.manifest_file = "init.pp"
-      puppet.options = [
-      '--verbose',
-#      '--debug',
-      ]
-    end
-  end
-
-  config.vm.define :ToFix_OpenBSD5_64 do |local|
-    local.vm.box = "openbsd50_amd64"
-    local.vm.box_url = "https://github.com/downloads/stefancocora/openbsd_amd64-vagrant/openbsd50_amd64.box"
-    local.vm.boot_mode = :gui
-    local.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.module_path = "modules"
-      puppet.manifest_file = "init.pp"
-      puppet.options = [
-      '--verbose',
-#      '--debug',
-      ]
-    end
-  end
-
-  config.vm.define :ToFix_Centos5_64 do |local|
-    local.vm.box = "centos5_64"
-    local.vm.box_url = "http://puppetlabs.s3.amazonaws.com/pub/centos5_64.box"
-    local.vm.boot_mode = :gui
-    local.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.module_path = "modules"
-      puppet.manifest_file = "init.pp"
-      puppet.options = [
-      '--verbose',
-#      '--debug',
-      ]
-    end
-  end
-
-  config.vm.define :ToFix_Centos5_32 do |local|
-    local.vm.box = "centos_56_32"
-    local.vm.box_url = "http://yum.mnxsolutions.com/vagrant/centos_56_32.box"
-    local.vm.boot_mode = :gui
-    local.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.module_path = "modules"
-      puppet.manifest_file = "init.pp"
-      puppet.options = [
-      '--verbose',
-#      '--debug',
-      ]
-    end
-  end
-
-  config.vm.define :ToFix_Centos4_64 do |local|
-    local.vm.box = "centos4_64"
-    local.vm.box_url = "http://puppetlabs.s3.amazonaws.com/pub/centos4_64.box"
-    local.vm.boot_mode = :gui
-    local.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.module_path = "modules"
-      puppet.manifest_file = "init.pp"
-      puppet.options = [
-      '--verbose',
-#      '--debug',
-      ]
-    end
-  end
-
-  config.vm.define :ToFix_Ubuntu1104_64 do |local|
-    local.vm.box = "natty64"
-    local.vm.box_url = "http://dl.dropbox.com/u/7490647/talifun-ubuntu-11.04-server-amd64.box"
-    local.vm.boot_mode = :gui
-    local.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.module_path = "modules"
-      puppet.manifest_file = "init.pp"
-      puppet.options = [
-      '--verbose',
-#      '--debug',
-      ]
-    end
-  end
-
-
-  # RedHat
-  config.vm.define :ToFix_RedHat6_64 do |local|
-    local.vm.box = "rhel60_64"
-    local.vm.box_url = "http://puppetlabs.s3.amazonaws.com/pub/rhel60_64.box"
-    local.vm.boot_mode = :gui
-    local.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.module_path = "modules"
-      puppet.manifest_file = "init.pp"
-      puppet.options = [
-      '--verbose',
-#      '--debug',
-      ]
-    end
-  end
-
-
-  # Scientific Linux
-  config.vm.define :ToFix_ScientificLinux6_64 do |local|
-    local.vm.box = "sl6_64"
-    local.vm.box_url = "http://lyte.id.au/vagrant/sl6-64-lyte.box"
-    local.vm.boot_mode = :gui
-    local.vm.provision :puppet do |puppet|
-      puppet.manifests_path = "manifests"
-      puppet.module_path = "modules"
-      puppet.manifest_file = "init.pp"
-      puppet.options = [
-      '--verbose',
-#      '--debug',
-      ]
-    end
-  end
-
 end
