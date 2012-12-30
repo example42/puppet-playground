@@ -109,6 +109,9 @@ clean() {
   rm -rf manifests/
   rm -f Puppetfile
   rm -f Puppetfile.lock
+  mkdir manifests
+  mkdir modules
+  touch manifests/init.pp
 }
 
 clean_librarian() {
