@@ -1,21 +1,39 @@
-### Global vars that affect any class declaration.
-
-# To test puppi integration uncomment below
-/*
-$puppi        = true
+## GENERAL SETUPS
+# To test puppi integration:
 $monitor      = true
 $monitor_tool = [ 'puppi' ]
-*/
 
-# General package management (not required)
-  case $::osfamily {
-    redhat: { include yum }
-    debian: { include apt }
+# Basic package management
+case $::osfamily {
+  redhat: {
+    include yum::repo::epel
+    package { 'redhat-lsb': ensure => present }
+  }
+  debian: {
+    include apt
+    package { 'lsb-release': ensure => present }
+  }
+  suse: {
+    package { 'lsb': ensure => present }
+  }
+}
+
+
+## JAVA INSTALLATION
+# Basic Java 6 JRE
+  class { 'java':
   }
 
-# Default setup
+## Alternative with Java 7 JDK
+/*
+  class { 'java':
+    jdk     => true,
+    version => 7,
+  }
+*/
 
-# USAGE SAMPLES
+
+# JBOSS INSTALLATION
 
 # Install Jboss 7 from upstream
   class { 'jboss':
@@ -26,6 +44,23 @@ $monitor_tool = [ 'puppi' ]
     user_gid             => '1502',
   }
 
-  class { 'java':
+# Default Installation
+/*
+  class { 'jboss':
   }
+*/
 
+
+
+## DEBUG
+# Uncomment below to have /tmp/puppet.debug with all the scope variables
+/*  
+  file { '/tmp/puppet.debug':
+    ensure   => present,
+    mode     => '0640',
+    owner    => 'root',
+    group    => 'root',
+    loglevel => debug,  # this is needed to avoid it being logged and reported on every run
+    content  => inline_template('<%= scope.to_yaml %>'),
+  }
+*/
