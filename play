@@ -82,7 +82,7 @@ run_puppi() {
   echo_title "Running puppi $puppi_action on the active boxes of the Playground"
   for vm in $(vagrant status | grep 'running$' | cut -d ' ' -f 1 ) ; do
     echo_title "puppi check on $vm"
-    vagrant ssh $vm -c "sudo puppi $puppi_action"
+    vagrant ssh $vm -c "sudo /usr/sbin/puppi $puppi_action"
   done
 }
 
