@@ -1,0 +1,41 @@
+forge "http://forge.puppetlabs.com"
+
+mod 'example42/puppi',
+  :git => 'https://github.com/example42/puppi.git'
+
+mod 'example42/monitor',
+  :git => 'https://github.com/example42/puppet-monitor.git'
+
+mod 'example42/firewall',
+  :git => 'https://github.com/example42/puppet-firewall.git'
+
+mod 'example42/yum',
+  :git => 'https://github.com/example42/puppet-yum.git'
+
+mod 'example42/apt',
+  :git => 'https://github.com/example42/puppet-apt.git'
+
+mod 'example42/example42',
+  :git => 'https://github.com/example42/puppet-example42.git'
+
+mod 'example42/sudo',
+  :git => 'https://github.com/example42/puppet-sudo.git'
+
+mod 'example42/ntp',
+  :git => 'https://github.com/example42/puppet-ntp.git'
+
+mod 'example42/openssh',
+  :git => 'https://github.com/example42/puppet-openssh.git'
+
+mod 'example42/rsyslog',
+  :git => 'https://github.com/example42/puppet-rsyslog.git'
+
+mod 'example42/resolver',
+  :git => 'https://github.com/example42/puppet-resolver.git'
+
+mod 'example42/nrpe',
+  :git => 'https://github.com/example42/puppet-nrpe.git'
+
+mod 'example42/munin',
+  :git => 'https://github.com/example42/puppet-munin.git'
+

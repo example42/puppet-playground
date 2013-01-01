@@ -32,6 +32,14 @@ case $::osfamily {
   }
 */
 
+## Alternative multi jdk installation
+/*
+java::install { 'Java7':
+  jdk     => true,
+  version => 7,
+}
+*/
+
 
 # TOMCAT INSTALLATION
 # Basic Tomcat Installation
