@@ -1,0 +1,79 @@
+Vagrant::Config.run do |config|
+
+  {
+    :'test-centos6' => {
+      :box     => 'centos-6.3-64bit',
+      :box_url => 'http://packages.vstone.eu/vagrant-boxes/centos-6.3-64bit-latest.box',
+      :hostname => 'test-centos6.example42.com',
+      :ip       => '10.42.42.26',
+      :forwards => { 80 => 20086, 443 => 20446, },
+    },
+    :'test-centos5' => {
+      :box     => 'centos-5.8-64bit',
+      :box_url => 'http://packages.vstone.eu/vagrant-boxes/centos-5.8-64bit-latest.box',
+      :hostname => 'test-centos5.example42.com',
+      :ip       => '10.42.42.25',
+      :forwards => { 80 => 20085, 443 => 20445, },
+    },
+    :'test-ubuntu1204' => {
+      :box     => 'precise64',
+      :box_url => 'http://files.vagrantup.com/precise64.box',
+      :hostname => 'test-centos6.example42.com',
+      :ip       => '10.42.42.35',
+      :forwards => { 80 => 20095, 443 => 20455, },
+    },
+    :'test-ubuntu1004' => {
+      :box     => 'lucid64',
+      :box_url => 'http://files.vagrantup.com/lucid64.box',
+      :hostname => 'test-ubuntu1004.example42.com',
+      :ip       => '10.42.42.24',
+      :forwards => { 80 => 20084, 443 => 20444, },
+    },
+    :'test-debian6' => {
+      :box     => 'squeeze64',
+      :box_url => 'http://puppetlabs.s3.amazonaws.com/pub/squeeze64.box',
+      :hostname => 'test-centos6.example42.com',
+      :ip       => '10.42.42.26',
+      :forwards => { 80 => 20086, 443 => 20446, },
+    },
+    :'test-sles11' => {
+      :box     => 'sles11sp1_64',
+      :box_url => 'http://puppetlabs.s3.amazonaws.com/pub/sles11sp1_64.box',
+      :hostname => 'test-centos6.example42.com',
+      :ip       => '10.42.42.30',
+      :forwards => { 80 => 20090, 443 => 20450, },
+    },
+    :'test-opensuse12' => {
+      :box     => 'OpenSuse12_1x64_July14',
+      :box_url => 'https://s3.amazonaws.com/circlejtp/OpenSuseVagrant/OpenSuse12_1x64_July14.box',
+      :hostname => 'test-opensuse12.example42.com',
+      :ip       => '10.42.42.38',
+      :forwards => { 80 => 20098, 443 => 20458, },
+    },
+  }.each do |name,cfg|
+    config.vm.define name do |local|
+      local.vm.box = cfg[:box] if cfg[:box]
+      local.vm.box_url = cfg[:box_url] if cfg[:box_url]
+      local.vm.host_name = cfg[:hostname] if cfg[:hostname]
+      local.vm.network :hostonly, cfg[:ip] if cfg[:ip]
+      
+      if cfg[:forwards]
+        cfg[:forwards].each do |from,to|
+          local.vm.forward_port from, to
+        end 
+      end
+ 
+#      local.vm.boot_mode = :gui
+      local.vm.provision :puppet do |puppet|
+        puppet.manifests_path = "manifests"
+        puppet.module_path = "modules"
+        puppet.manifest_file = "init.pp"
+        puppet.options = [
+         '--verbose',
+  #      '--debug',
+        ]
+      end
+    end
+  end
+end
+
