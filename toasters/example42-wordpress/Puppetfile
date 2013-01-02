@@ -1,0 +1,33 @@
+forge "http://forge.puppetlabs.com"
+
+mod 'example42/puppi',
+  :git => 'https://github.com/example42/puppi.git'
+
+mod 'example42/monitor',
+  :git => 'https://github.com/example42/puppet-monitor.git'
+
+mod 'example42/firewall',
+  :git => 'https://github.com/example42/puppet-firewall.git'
+
+mod 'example42/yum',
+  :git => 'https://github.com/example42/puppet-yum.git'
+
+mod 'example42/apt',
+  :git => 'https://github.com/example42/puppet-apt.git'
+
+mod 'example42/apache',
+  :git => 'https://github.com/example42/puppet-apache.git'
+
+mod 'example42/mysql',
+  :git => 'https://github.com/example42/puppet-mysql.git'
+
+mod 'example42/php',
+  :git => 'https://github.com/example42/puppet-php.git'
+
+mod 'example42/vsftpd',
+  :git => 'https://github.com/example42/puppet-vsftpd.git'
+
+mod 'example42/wordpress',
+  :git => 'git://github.com/example42/puppet-wordpress.git'
+
+
