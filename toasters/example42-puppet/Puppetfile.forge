@@ -1,0 +1,6 @@
+forge "http://forge.puppetlabs.com"
+
+mod 'example42/puppet'
+mod 'example42/monitor'
+mod 'example42/firewall'
+mod 'example42/apache'
