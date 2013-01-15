@@ -1,7 +1,15 @@
 ## GENERAL SETUPS
-# To test puppi integration:
+# Automatic monitoring management. $monitor_tool can be an array
 $monitor      = true
 $monitor_tool = [ 'puppi' ]
+
+# Uncomment below to enable host based firewalling with Iptables
+# $firewall      = true
+# $firewall_tool = [ 'iptables' ]
+
+# Uncomment below to enabled debugging
+# $debug        = true
+
 
 # Basic package management
 case $::osfamily {
