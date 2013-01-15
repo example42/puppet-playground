@@ -9,6 +9,9 @@ mod 'example42/monitor',
 mod 'example42/firewall',
   :git => 'https://github.com/example42/puppet-firewall.git'
 
+mod 'example42/iptables',
+  :git => 'https://github.com/example42/puppet-iptables.git'
+
 mod 'example42/yum',
   :git => 'https://github.com/example42/puppet-yum.git'
 
@@ -38,4 +41,6 @@ mod 'example42/nrpe',
 
 mod 'example42/munin',
   :git => 'https://github.com/example42/puppet-munin.git'
+
+mod 'ripienaar/concat'
 
