@@ -13,6 +13,10 @@ Vagrant::Config.run do |config|
       :box     => 'centos-5.8-64bit',
       :box_url => 'http://packages.vstone.eu/vagrant-boxes/centos-5.8-64bit-latest.box',
     },
+    :Ubuntu1210_32 => {
+      :box     => 'quantal32',
+      :box_url => 'http://cloud-images.ubuntu.com/vagrant/quantal/current/quantal-server-cloudimg-i386-vagrant-disk1.box',
+    },
     :Ubuntu1204_64 => {
       :box     => 'precise64',
       :box_url => 'http://files.vagrantup.com/precise64.box',
