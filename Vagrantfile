@@ -33,7 +33,7 @@ Vagrant::Config.run do |config|
       :box     => 'lucid32',
       :box_url => 'http://files.vagrantup.com/lucid32.box',
     },
-    :Debian7_64 => {
+    :Debian7_64_pre => {
       :box     => 'wheezy64_temp',
       :box_url => 'http://dl.dropbox.com/u/937870/VMs/wheezy64.box',
     },
