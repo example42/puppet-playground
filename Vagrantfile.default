@@ -33,6 +33,10 @@ Vagrant::Config.run do |config|
       :box     => 'lucid32',
       :box_url => 'http://files.vagrantup.com/lucid32.box',
     },
+    :Debian7_64 => {
+      :box     => 'wheezy64_temp',
+      :box_url => 'http://dl.dropbox.com/u/937870/VMs/wheezy64.box',
+    },
     :Debian6_64 => {
       :box     => 'squeeze64',
       :box_url => 'http://puppetlabs.s3.amazonaws.com/pub/squeeze64.box',
