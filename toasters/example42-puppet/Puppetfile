@@ -6,6 +6,9 @@ mod 'example42/puppi',
 mod 'example42/puppet',
   :git => 'https://github.com/example42/puppet-puppet.git'
 
+mod 'example42/mysql',
+  :git => 'https://github.com/example42/puppet-puppet.git'
+
 mod 'example42/monitor',
   :git => 'https://github.com/example42/puppet-monitor.git'
 
