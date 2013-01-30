@@ -49,6 +49,10 @@ Vagrant::Config.run do |config|
       :box     => 'OpenSuse12_1x64_July14',
       :box_url => 'https://s3.amazonaws.com/circlejtp/OpenSuseVagrant/OpenSuse12_1x64_July14.box',
     },
+    :Scientific6_64 => {
+      :box     => 'sl6_64',
+      :box_url => 'http://wc.nc.tc/puppet-playground/ScientificLinux-6.3-64-Vbox-4.2.6-Puppet-3.0.2.box',
+    }, 
   }.each do |name,cfg|
     config.vm.define name do |local|
       local.vm.box = cfg[:box]
