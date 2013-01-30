@@ -23,6 +23,9 @@ mod 'example42/apt',
 mod 'example42/apache',
   :git => 'https://github.com/example42/puppet-apache.git'
 
+mod 'example42/nginx',
+  :git => 'https://github.com/example42/puppet-nginx.git'
+
 mod 'example42/mysql',
   :git => 'https://github.com/example42/puppet-mysql.git'
 

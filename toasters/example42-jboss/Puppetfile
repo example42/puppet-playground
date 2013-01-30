@@ -3,9 +3,6 @@ forge "http://forge.puppetlabs.com"
 mod 'example42/puppi',
   :git => 'https://github.com/example42/puppi.git'
 
-mod 'example42/puppet',
-  :git => 'https://github.com/example42/puppet-puppet.git'
-
 mod 'example42/monitor',
   :git => 'https://github.com/example42/puppet-monitor.git'
 
