@@ -38,8 +38,8 @@ Vagrant::Config.run do |config|
       :box_url => 'http://dl.dropbox.com/u/937870/VMs/wheezy64.box',
     },
     :Debian6_64 => {
-      :box     => 'squeeze64',
-      :box_url => 'http://puppetlabs.s3.amazonaws.com/pub/squeeze64.box',
+      :box     => 'ergonlogicsqueeze64',
+      :box_url => 'http://ergonlogic.com/files/boxes/debian-current.box',
     },
     :SuseLinux11_64 => {
       :box     => 'sles11sp1_64',
