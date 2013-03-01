@@ -23,7 +23,7 @@ In order to install the ruby gem you simply need a version of the ruby interpret
 Clone this repo to a work directory of your choice (here puppet-playground):
 
     git clone https://github.com/example42/puppet-playground.git puppet-playground
-    
+
 Move into the newly created directory, from this point all commands are relative to this path:
 
     cd puppet-playground
@@ -48,7 +48,7 @@ To show the status of the Puppet Playground
 
 You can add the modules you want in puppet-playground/modules. For this you have various alternatives:
 
-  **1** - If you want to **quick test Puppet resources** without using modules just write your Puppet code in **manifests/init.pp** (see below). 
+  **1** - If you want to **quick test Puppet resources** without using modules just write your Puppet code in **manifests/init.pp** (see below).
 
     vi manifests/init.pp
 
@@ -65,20 +65,20 @@ which is exactly the same of:
     ./play forge install puppetlabs-apache
 
   **3** - If you want to test the NextGen Example42 modules you can just type
- 
+
     ./play setup example42
 
 This initializes the modules dir with the Example42 NextGen modules, directly cloned from GitHub.
 
   **4** - If you want to **test your own modules** just place them in the modules dir, one module per directory, as you would do in your puppet master.
 
-  **5** - If you want to **play with toasters**, install **librarian-puppet toasters** and use the play command (more details below) 
+  **5** - If you want to **play with toasters**, install **librarian-puppet toasters** and use the play command (more details below)
 
     gem install librarian-puppet
     ./play list
     ./play install <toaster>
-  
-  
+
+
 ## Vagrant Usage
 
 Whatever method you use to populate the modules’ directory and the default manifest directory, you can test your Puppet code on the running Vagrant boxes. First, review (if you want) the default Vagrantfile provided by puppet-playground. You will see a normal MultiVM setup with masterless Puppet integration
@@ -92,7 +92,7 @@ You can see the available VMs with:
 Expect an output like the one below:
 
     Current VM states:
- 
+
     Test_Centos6_64          not created
     Test_Ubuntu1204_64       not created
     Test_Ubuntu1004_64       not created
@@ -321,7 +321,7 @@ or view from them realtime infos like:
 
 ### Broken Vagrant Boxes
 
-Not all the Vagrant boxes have been widely tested, they have probably old versions of the VirtualBox Guest Additions and maybe 
+Not all the Vagrant boxes have been widely tested, they have probably old versions of the VirtualBox Guest Additions and maybe
 provide not updated Vagrant configurations.
 
 If, during a vagrant up you find errors like:
@@ -355,7 +355,7 @@ Note that the active "old" VMs are still running and you can manage them via vag
 To reinstall on the Playground the default Vagrantfile (note that this command does not change the content of modules/ Puppetfile and manifests/):
 
     ./play setup default
- 
+
 To (re)install on the Playground a Vagrantfile from a toaster (this will override also the Puppet configurations)
 
     ./play install toaster_name
