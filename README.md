@@ -15,7 +15,12 @@ To remove, fix or add entries please send pull requests for [Vagrantfile](https:
 
 ## Installation
 
-Clone this repo to a work directory of your choice (here puppet-playground): 
+You should have vagrant installed by either the native OS package or the ruby gem.
+In order to install the ruby gem you simply need a version of the ruby interpreter installed and then you can just:
+
+    gem install vagrant
+
+Clone this repo to a work directory of your choice (here puppet-playground):
 
     git clone https://github.com/example42/puppet-playground.git puppet-playground
     
@@ -23,7 +28,11 @@ Move into the newly created directory, from this point all commands are relative
 
     cd puppet-playground
 
-What you have is a normal Vagrant multi VM environment:
+Then you can install all the required ruby gems with Bundler:
+
+    bundle
+
+Now, what you have is a normal Vagrant multi VM environment:
 
     vagrant status
 
