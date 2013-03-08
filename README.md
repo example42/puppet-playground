@@ -370,3 +370,5 @@ Any contribution is very welcomed: the Playground is funnier if there are more k
 [![Build Status](https://travis-ci.org/example42/puppet-clvm.png?branch=master)](https://travis-ci.org/example42/puppet-clvm)
 
 [![Build Status](https://travis-ci.org/example42/puppet-nginx.png?branch=master)](https://travis-ci.org/example42/puppet-nginx)
+
+[![Build Status](https://travis-ci.org/example42/puppet-splunk.png?branch=master)](https://travis-ci.org/example42/puppet-splunk)
