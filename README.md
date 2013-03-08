@@ -366,3 +366,5 @@ This Puppet Playground might become more and more useful if:
 
 Any contribution is very welcomed: the Playground is funnier if there are more kids around ;-)
 
+
+[![Build Status](https://travis-ci.org/example42/puppet-clvm.png?branch=master)](https://travis-ci.org/example42/puppet-clvm)
