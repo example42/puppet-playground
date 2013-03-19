@@ -78,7 +78,7 @@ The Puppet code is placed in 2 locations of the playground:
 
       puppet module install <modulename>  --modulepath modules/
 
-    So, for example you can type:
+  So, for example you can type:
 
       puppet module install puppetlabs-apache  --modulepath modules/
 
