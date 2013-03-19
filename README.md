@@ -70,11 +70,11 @@ The Puppet code is placed in 2 locations of the playground:
 
 - Modules are in **modules/**, you can populate this directory in different ways:
 
-  **1** - If you want to **quick test Puppet resources** without using modules just write your Puppet code in **manifests/init.pp** (see below).
+**1** - If you want to **quick test Puppet resources** without using modules just write your Puppet code in **manifests/init.pp** (see below).
 
       vi manifests/init.pp
 
-  **2** - If you want to test modules from the **Puppet Forge** you can install them with:
+**2** - If you want to test modules from the **Puppet Forge** you can install them with:
 
       puppet module install <modulename>  --modulepath modules/
 
@@ -86,15 +86,15 @@ The Puppet code is placed in 2 locations of the playground:
 
       ./play forge install puppetlabs-apache
 
-  **3** - If you want to test the NextGen Example42 modules you can just type
+**3** - If you want to test the NextGen Example42 modules you can just type
 
       ./play setup example42
 
   This initializes the modules dir with the Example42 NextGen modules, directly cloned from GitHub.
 
-  **4** - If you want to **test your own modules** just place them in the modules dir, one module per directory, as you would do in your puppet master.
+**4** - If you want to **test your own modules** just place them in the modules dir, one module per directory, as you would do in your puppet master.
 
-  **5** - If you want to **play with toasters**, install **librarian-puppet toasters** and use the play command (more details below)
+**5** - If you want to **play with toasters**, install **librarian-puppet toasters** and use the play command (more details below)
 
       ./play list
       ./play install <toaster>
