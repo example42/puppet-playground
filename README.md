@@ -15,61 +15,91 @@ To remove, fix or add entries please send pull requests for [Vagrantfile](https:
 
 ## Installation
 
-Clone this repo to a work directory of your choice (here puppet-playground): 
+You need **[VirtualBox](https://www.virtualbox.org/)** , **[Vagrant](http://www.vagrantup.com/)** and **Git** installed on your system.
+
+Then you can just clone this repo to a work directory of your choice (here puppet-playground):
 
     git clone https://github.com/example42/puppet-playground.git puppet-playground
-    
-Move into the newly created directory, from this point all commands are relative to this path:
+
+and move into the newly created directory.
 
     cd puppet-playground
 
-What you have is a normal Vagrant multi VM environment:
+Note: from this point all commands are relative to this path.
+
+To use toasters you also need **[Librarian Puppet](https://github.com/rodjek/librarian-puppet)**, you can install it as a gem:
+
+    gem install librarian-puppet
+
+Alternatively you can install Vagrant and Librarian Puppet gems with with Bundler:
+
+    bundle
+
+
+## Basic usage
+Once you have moved into the playground you have at disposal various commands:
+
+  **1** - **Vagrant**. Show available subcommands with:
+
+    vagrant
+
+  Show the Vagrant status with:
 
     vagrant status
 
-This is enough to play with Puppet in Masterless mode:
-default manifest is **[manifests/init.pp](https://github.com/example42/puppet-playground/blob/master/manifests/init.pp)**,
-modules are in **modules/**.
 
-To show the status of the Puppet Playground
+  **2** - Puppet Playground's **play** command. Show available actions with:
+
+    ./play
+
+  Show the status of the Puppet Playground with:
 
     ./play status
+    
+  **3** - **Librarian Puppet**. Show available tasks with:
+  
+    librarian-puppet
+
 
 ## Install modules and toasters
 
-You can add the modules you want in puppet-playground/modules. For this you have various alternatives:
+The Puppet code is placed in 2 locations of the playground:
 
-  **1** - If you want to **quick test Puppet resources** without using modules just write your Puppet code in **manifests/init.pp** (see below). 
+- Default manifest is **manifests/init.pp**, here you play with your Puppet code.
+  You can test native resources or use resources and classes provided by modules.
 
-    vi manifests/init.pp
+- Modules are in **modules/**, you can populate this directory in different ways:
 
-  **2** - If you want to test modules from the **Puppet Forge** you can install them with:
+**1** - If you want to **quick test Puppet resources** without using modules just write your Puppet code in **manifests/init.pp** (see below).
 
-    puppet module install <modulename>  --modulepath modules/
+      vi manifests/init.pp
 
-So, for example you can type:
+**2** - If you want to test modules from the **Puppet Forge** you can install them with:
 
-    puppet module install puppetlabs-apache  --modulepath modules/
+      puppet module install <modulename>  --modulepath modules/
 
-which is exactly the same of:
+  So, for example you can type:
 
-    ./play forge install puppetlabs-apache
+      puppet module install puppetlabs-apache  --modulepath modules/
 
-  **3** - If you want to test the NextGen Example42 modules you can just type
- 
-    ./play setup example42
+  which is exactly the same of:
 
-This initializes the modules dir with the Example42 NextGen modules, directly cloned from GitHub.
+      ./play forge install puppetlabs-apache
 
-  **4** - If you want to **test your own modules** just place them in the modules dir, one module per directory, as you would do in your puppet master.
+**3** - If you want to test the NextGen Example42 modules you can just type
 
-  **5** - If you want to **play with toasters**, install **librarian-puppet toasters** and use the play command (more details below) 
+      ./play setup example42
 
-    gem install librarian-puppet
-    ./play list
-    ./play install <toaster>
-  
-  
+  This initializes the modules dir with the Example42 NextGen modules, directly cloned from GitHub.
+
+**4** - If you want to **test your own modules** just place them in the modules dir, one module per directory, as you would do in your puppet master.
+
+**5** - If you want to **play with toasters**, install **librarian-puppet toasters** and use the play command (more details below)
+
+      ./play list
+      ./play install <toaster>
+
+
 ## Vagrant Usage
 
 Whatever method you use to populate the modules’ directory and the default manifest directory, you can test your Puppet code on the running Vagrant boxes. First, review (if you want) the default Vagrantfile provided by puppet-playground. You will see a normal MultiVM setup with masterless Puppet integration
@@ -83,35 +113,32 @@ You can see the available VMs with:
 Expect an output like the one below:
 
     Current VM states:
- 
-    Test_Centos6_64          not created
-    Test_Ubuntu1204_64       not created
-    Test_Ubuntu1004_64       not created
-    Test_Ubuntu1004_32       not created
-    Test_Debian6_64          not created
-    Test_SuseLinux11_64      not created
-    Test_OpenSuse12_64       not created
-    ToFix_Solaris10_64       not created
-    ToFix_FreeBSD9_64        not created
-    ToFix_OpenBSD5_64        not created
-    ToFix_Centos5_64         not created
-    ToFix_Centos5_32         not created
-    ToFix_Centos4_64         not created
-    ToFix_Ubuntu1104_64      not created
-    ToFix_RedHat6_64         not created
-    ToFix_ScientificLinux6_64not created
 
-Boxes with the Test_ prefix have successfully been tested on an updated Vagrant/VirtualBox installation, the ones with ToFix_ have had some problem for a smooth automated Puppet run. This list is going to be updated and corrected.
+    Centos6_64               not created (virtualbox)
+    Centos63_64              not created (virtualbox)
+    Centos58_64              not created (virtualbox)
+    Ubuntu1304_64            not created (virtualbox)
+    Ubuntu1210_64            not created (virtualbox)
+    Ubuntu1204_64            not created (virtualbox)
+    Ubuntu1004_64            not created (virtualbox)
+    Ubuntu1004_32            not created (virtualbox)
+    Debian7_64_pre           not created (virtualbox)
+    Debian6_64               not created (virtualbox)
+    SuseLinux11_64           not created (virtualbox)
+    OpenSuse12_64            not created (virtualbox)
+    Scientific6_64           not created (virtualbox)
+
+Note that this list is going to be updated and corrected.
 
 You can run any of the provided Vagrant boxes with:
 
-    vagrant up Test_Centos6_64
+    vagrant up Centos6_64
 
 This may take some minutes, the first time you run it, to download the base box from the Internet.
 
 Once created the VM, you can connect to it with:
 
-    vagrant ssh Test_Centos6_64
+    vagrant ssh Centos6_64
 
 Note that at the moment headless mode is disabled, so you’ll see the VirtualBox console window pop up. If you encounter problems with ssh, you should be able to login with user ‘vagrant’ and password ‘vagrant’ and then sudo -s.
 
@@ -121,12 +148,12 @@ To exit from the shell on the VM
 
 To restart your VM:
 
-    vagrant reload Test_Centos6_64
+    vagrant reload Centos6_64
 
 To destroy and rebuild from scratch:
 
-    vagrant destroy Test_Centos6_64
-    vagrant up Test_Centos6_64
+    vagrant destroy Centos6_64
+    vagrant up Centos6_64
 
 
 ## Work with Puppet
@@ -163,11 +190,11 @@ To test your code’s changes on a single node, you have two alternatives:
 
 From your host, in the puppet-playground directory:
 
-    vagrant provision Test_Centos6_64
+    vagrant provision Centos6_64
 
 From the VM you have created:
 
-    vagrant ssh Test_Centos6_64
+    vagrant ssh Centos6_64
 
 Once you’ve logged in the VM, get the superpowers and run Puppet:
 
@@ -312,7 +339,7 @@ or view from them realtime infos like:
 
 ### Broken Vagrant Boxes
 
-Not all the Vagrant boxes have been widely tested, they have probably old versions of the VirtualBox Guest Additions and maybe 
+Not all the Vagrant boxes have been widely tested, they have probably old versions of the VirtualBox Guest Additions and maybe
 provide not updated Vagrant configurations.
 
 If, during a vagrant up you find errors like:
@@ -346,7 +373,7 @@ Note that the active "old" VMs are still running and you can manage them via vag
 To reinstall on the Playground the default Vagrantfile (note that this command does not change the content of modules/ Puppetfile and manifests/):
 
     ./play setup default
- 
+
 To (re)install on the Playground a Vagrantfile from a toaster (this will override also the Puppet configurations)
 
     ./play install toaster_name
