@@ -392,10 +392,3 @@ This Puppet Playground might become more and more useful if:
   - New ideas and integrations are delivered (ie: Travis, Jenkins for automatic checks of deployed toasters)
 
 Any contribution is very welcomed: the Playground is funnier if there are more kids around ;-)
-
-
-[![Build Status](https://travis-ci.org/example42/puppet-clvm.png?branch=master)](https://travis-ci.org/example42/puppet-clvm)
-
-[![Build Status](https://travis-ci.org/example42/puppet-nginx.png?branch=master)](https://travis-ci.org/example42/puppet-nginx)
-
-[![Build Status](https://travis-ci.org/example42/puppet-splunk.png?branch=master)](https://travis-ci.org/example42/puppet-splunk)
