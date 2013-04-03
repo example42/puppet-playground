@@ -52,6 +52,10 @@ Once you have moved into the playground you have at disposal various commands:
 
     ./play
 
+  Eventually add the current puppet-playground dir to PATH:
+
+    PATH=$PATH:`pwd`
+
   Show the status of the Puppet Playground with:
 
     ./play status
