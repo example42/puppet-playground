@@ -1,0 +1,51 @@
+forge "http://forge.puppetlabs.com"
+mod 'ripienaar/concat'
+
+mod 'example42/puppi',
+  :git => 'https://github.com/example42/puppi.git'
+
+mod 'example42/puppet',
+  :git => 'https://github.com/example42/puppet-puppet.git'
+
+mod 'example42/mysql',
+  :git => 'https://github.com/example42/puppet-puppet.git'
+
+mod 'example42/monitor',
+  :git => 'https://github.com/example42/puppet-monitor.git'
+
+mod 'example42/firewall',
+  :git => 'https://github.com/example42/puppet-firewall.git'
+
+mod 'example42/iptables',
+  :git => 'https://github.com/example42/puppet-iptables.git'
+
+mod 'example42/apache',
+  :git => 'https://github.com/example42/puppet-apache.git'
+
+mod 'example42/yum',
+  :git => 'https://github.com/example42/puppet-yum.git'
+
+mod 'example42/apt',
+  :git => 'https://github.com/example42/puppet-apt.git'
+
+mod 'example42/lsb',
+  :git => 'https://github.com/example42/puppet-lsb.git'
+
+mod 'example42/foreman',
+  :git => 'https://github.com/example42/puppet-foreman.git'
+
+mod 'example42/puppetdb',
+  :git => 'https://github.com/example42/puppet-puppetdb.git'
+
+mod 'example42/postgresql',
+  :git => 'https://github.com/example42/puppet-postgresql.git'
+
+mod 'example42/mysql',
+  :git => 'https://github.com/example42/puppet-mysql.git'
+
+mod 'example42/mcollective',
+  :git => 'https://github.com/example42/puppet-mcollective.git'
+
+
+
+

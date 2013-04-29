@@ -1,0 +1,104 @@
+Vagrant::Config.run do |config|
+
+  {
+    :'puppet' => {
+      :hostname   => 'puppet.example42.com',
+      :puppetmode => 'apply',
+      :ip         => '10.42.42.10',
+      :forwards   => { 80 => 20080, 443 => 20443, 3000 => 23000 },
+    },
+    :'puppetdb' => {
+      :hostname   => 'puppetdb.example42.com',
+      :puppetmode => 'apply',
+      :ip         => '10.42.42.11',
+      :forwards   => { 80 => 20081, 443 => 20444, 3000 => 23001 },
+    },
+    :'foreman' => {
+      :hostname   => 'foreman.example42.com',
+      :puppetmode => 'apply',
+      :ip         => '10.42.42.13',
+      :forwards => { 80 => 20086, 443 => 20446, },
+    },
+
+    :'test-centos5' => {
+      :os       => 'Centos5',
+      :hostname => 'test-centos5.example42.com',
+      :ip       => '10.42.42.25',
+      :forwards => { 80 => 20085, 443 => 20445, },
+    },
+    :'test-ubuntu1204' => {
+      :os       => 'Ubuntu1204',
+      :hostname => 'test-ubuntu1204.example42.com',
+      :ip       => '10.42.42.26',
+      :forwards => { 80 => 20095, 443 => 20455, },
+    },
+    :'test-ubuntu1004' => {
+      :os       => 'Ubuntu1004',
+      :hostname => 'test-ubuntu1004.example42.com',
+      :ip       => '10.42.42.24',
+      :forwards => { 80 => 20084, 443 => 20444, },
+    },
+    :'test-debian6' => {
+      :os       => 'Debian6',
+      :hostname => 'test-debian6.example42.com',
+      :ip       => '10.42.42.22',
+      :forwards => { 80 => 20082, 443 => 20442, },
+    },
+    :'test-opensuse11' => {
+      :os       => 'OpenSuse11',
+      :hostname => 'test-opensuse11.example42.com',
+      :ip       => '10.42.42.37',
+      :forwards => { 80 => 20097, 443 => 20457, },
+    },
+    :'test-opensuse12' => {
+      :os       => 'OpenSuse12',
+      :hostname => 'test-opensuse12.example42.com',
+      :ip       => '10.42.42.38',
+      :forwards => { 80 => 20098, 443 => 20458, },
+    },
+  }.each do |name,cfg|
+    config.vm.define name do |local|
+      local.vm.box_url = case cfg[:os]
+        when 'Centos5' then 'http://vagrant-jls.objects.dreamhost.com/CentOS-5.9-x86_64-minimal.box'
+        when 'Centos6' then 'http://vagrant-jls.objects.dreamhost.com/CentOS-6.4-x86_64-minimal.box'
+        when 'Fedora18' then 'http://vagrant-jls.objects.dreamhost.com/Fedora-18-x86_64.box'
+        when 'Debian5' then 'http://vagrant-jls.objects.dreamhost.com/Debian-5.0.10-amd64-netboot.box'
+        when 'Debian6' then 'http://vagrant-jls.objects.dreamhost.com/Debian-6.0.7-amd64-netboot.box'
+        when 'Debian7' then 'http://vagrant-jls.objects.dreamhost.com/Debian-7.0-rc1-amd64-netboot.box'
+        when 'Ubuntu804' then 'http://vagrant-jls.objects.dreamhost.com/ubuntu-8.04.4-server-amd64.box'
+        when 'Ubuntu1004' then 'http://vagrant-jls.objects.dreamhost.com/ubuntu-10.04.4-server-amd64.box'
+        when 'Ubuntu1204' then 'http://vagrant-jls.objects.dreamhost.com/ubuntu-12.04.2-server-amd64.box'
+        when 'OpenSuse11' then 'http://vagrant-jls.objects.dreamhost.com/openSUSE-11.4-NET-x86_64.box'
+        when 'Scientific5' then 'http://vagrant-jls.objects.dreamhost.com/scientificlinux-5.9-x86_64-netboot.box'
+        when 'Scientific6' then 'http://vagrant-jls.objects.dreamhost.com/scientificlinux-6.3-x86_64-netboot.box'
+        else 'http://vagrant-jls.objects.dreamhost.com/CentOS-6.4-x86_64-minimal.box'
+      end
+
+ #     local.vm.box = cfg[:box] if cfg[:box]
+      local.vm.host_name = cfg[:hostname] if cfg[:hostname]
+      local.vm.network :hostonly, cfg[:ip] if cfg[:ip]
+
+      if cfg[:forwards]
+        cfg[:forwards].each do |from,to|
+          local.vm.forward_port from, to
+        end
+      end
+
+#      local.vm.boot_mode = :gui
+      local.vm.provision :puppet do |puppet|
+        if cfg[:puppetmode] = "agent"
+          puppet.puppet_server = "puppet.example42.com"
+        else
+          puppet.manifests_path = "manifests"
+          puppet.module_path = "modules"
+          puppet.manifest_file = "init.pp"
+        end
+        puppet.options = [
+         '--verbose',
+  #      '--debug',
+        ]
+      end
+    end
+  end
+end
+
