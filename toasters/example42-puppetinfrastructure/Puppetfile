@@ -46,6 +46,12 @@ mod 'example42/mysql',
 mod 'example42/mcollective',
   :git => 'https://github.com/example42/puppet-mcollective.git'
 
+mod 'example42/tftp',
+  :git => 'https://github.com/example42/puppet-tftp.git'
+
+mod 'example42/xinetd',
+  :git => 'https://github.com/example42/puppet-xinetd.git'
+
 
 
 

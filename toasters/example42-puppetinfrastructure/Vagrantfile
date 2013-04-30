@@ -2,62 +2,117 @@ Vagrant::Config.run do |config|
 
   {
     :'puppet' => {
+      :os         => 'default',
       :hostname   => 'puppet.example42.com',
       :puppetmode => 'apply',
       :ip         => '10.42.42.10',
-      :forwards   => { 80 => 20080, 443 => 20443, 3000 => 23000 },
+      :forwards   => { 80 => 8010, 443 => 44310 },
     },
     :'puppetdb' => {
+      :os         => 'default',
       :hostname   => 'puppetdb.example42.com',
       :puppetmode => 'apply',
-      :ip         => '10.42.42.11',
-      :forwards   => { 80 => 20081, 443 => 20444, 3000 => 23001 },
+      :ip         => '10.42.42.9',
+      :forwards   => { 80 => 8009, 443 => 44309 },
     },
     :'foreman' => {
+      :os         => 'default',
       :hostname   => 'foreman.example42.com',
       :puppetmode => 'apply',
-      :ip         => '10.42.42.13',
-      :forwards => { 80 => 20086, 443 => 20446, },
+      :ip         => '10.42.42.8',
+      :forwards => { 80 => 8008, 443 => 44308, },
+    },
+    :'syslog' => {
+      :os         => 'default',
+      :hostname   => 'syslog.example42.com',
+      :puppetmode => 'agent',
+      :ip         => '10.42.42.15',
+      :forwards   => { 80 => 8015, 443 => 44315, },
+    },
+    :'nagios' => {
+      :os         => 'default',
+      :hostname   => 'nagios.example42.com',
+      :puppetmode => 'agent',
+      :ip         => '10.42.42.11',
+      :forwards   => { 80 => 8011, 443 => 44311, },
+    },
+    :'munin' => {
+      :os         => 'default',
+      :hostname   => 'munin.example42.com',
+      :puppetmode => 'agent',
+      :ip         => '10.42.42.15',
+      :forwards   => { 80 => 8015, 443 => 44315, },
+    },
+    :'mq' => {
+      :os         => 'default',
+      :hostname   => 'syslog.example42.com',
+      :puppetmode => 'agent',
+      :ip         => '10.42.42.41',
+      :forwards   => { 80 => 8041, 443 => 44341, },
+    },
+    :'ldap1' => {
+      :os         => 'default',
+      :hostname   => 'ldap1.example42.com',
+      :puppetmode => 'agent',
+      :ip         => '10.42.42.5',
+      :forwards   => { 80 => 8005, 443 => 44305, },
     },
 
     :'test-centos5' => {
-      :os       => 'Centos5',
-      :hostname => 'test-centos5.example42.com',
-      :ip       => '10.42.42.25',
-      :forwards => { 80 => 20085, 443 => 20445, },
+      :os         => 'Centos5',
+      :hostname   => 'test-centos5.example42.com',
+      :puppetmode => 'agent',
+      :ip         => '10.42.42.25',
+      :forwards   => { 80 => 8025, 443 => 44325, },
+    },
+    :'test-centos6' => {
+      :os         => 'Centos6',
+      :hostname   => 'test-centos6.example42.com',
+      :puppetmode => 'agent',
+      :ip         => '10.42.42.26',
+      :forwards   => { 80 => 8026, 443 => 44326, },
     },
     :'test-ubuntu1204' => {
-      :os       => 'Ubuntu1204',
-      :hostname => 'test-ubuntu1204.example42.com',
-      :ip       => '10.42.42.26',
-      :forwards => { 80 => 20095, 443 => 20455, },
+      :os         => 'Ubuntu1204',
+      :hostname   => 'test-ubuntu1204.example42.com',
+      :puppetmode => 'agent',
+      :ip         => '10.42.42.35',
+      :forwards   => { 80 => 8035, 443 => 44335, },
     },
     :'test-ubuntu1004' => {
-      :os       => 'Ubuntu1004',
-      :hostname => 'test-ubuntu1004.example42.com',
-      :ip       => '10.42.42.24',
-      :forwards => { 80 => 20084, 443 => 20444, },
+      :os         => 'Ubuntu1004',
+      :hostname   => 'test-ubuntu1004.example42.com',
+      :puppetmode => 'agent',
+      :ip         => '10.42.42.24',
+      :forwards   => { 80 => 8024, 443 => 44324, },
     },
     :'test-debian6' => {
-      :os       => 'Debian6',
-      :hostname => 'test-debian6.example42.com',
-      :ip       => '10.42.42.22',
-      :forwards => { 80 => 20082, 443 => 20442, },
+      :os         => 'Debian6',
+      :hostname   => 'test-debian6.example42.com',
+      :puppetmode => 'agent',
+      :ip         => '10.42.42.22',
+      :forwards   => { 80 => 8022, 443 => 44322, },
     },
     :'test-opensuse11' => {
-      :os       => 'OpenSuse11',
-      :hostname => 'test-opensuse11.example42.com',
-      :ip       => '10.42.42.37',
-      :forwards => { 80 => 20097, 443 => 20457, },
+      :os         => 'OpenSuse11',
+      :hostname   => 'test-opensuse11.example42.com',
+      :puppetmode => 'agent',
+      :ip         => '10.42.42.37',
+      :forwards   => { 80 => 8037, 443 => 44337, },
     },
     :'test-opensuse12' => {
-      :os       => 'OpenSuse12',
-      :hostname => 'test-opensuse12.example42.com',
-      :ip       => '10.42.42.38',
-      :forwards => { 80 => 20098, 443 => 20458, },
+      :os         => 'OpenSuse12',
+      :hostname   => 'test-opensuse12.example42.com',
+      :puppetmode => 'agent',
+      :ip         => '10.42.42.38',
+      :forwards   => { 80 => 8038, 443 => 43338, },
     },
   }.each do |name,cfg|
     config.vm.define name do |local|
+
+      local.vm.host_name = cfg[:hostname] if cfg[:hostname]
+      local.vm.network :hostonly, cfg[:ip] if cfg[:ip]
+
       local.vm.box_url = case cfg[:os]
         when 'Centos5' then 'http://vagrant-jls.objects.dreamhost.com/CentOS-5.9-x86_64-minimal.box'
         when 'Centos6' then 'http://vagrant-jls.objects.dreamhost.com/CentOS-6.4-x86_64-minimal.box'
@@ -73,10 +128,7 @@ Vagrant::Config.run do |config|
         when 'Scientific6' then 'http://vagrant-jls.objects.dreamhost.com/scientificlinux-6.3-x86_64-netboot.box'
         else 'http://vagrant-jls.objects.dreamhost.com/CentOS-6.4-x86_64-minimal.box'
       end
-
- #     local.vm.box = cfg[:box] if cfg[:box]
-      local.vm.host_name = cfg[:hostname] if cfg[:hostname]
-      local.vm.network :hostonly, cfg[:ip] if cfg[:ip]
+      local.vm.box = local.vm.box_url.split('/').last
 
       if cfg[:forwards]
         cfg[:forwards].each do |from,to|
@@ -84,20 +136,21 @@ Vagrant::Config.run do |config|
         end
       end
 
-#      local.vm.boot_mode = :gui
+#      local.vm.provision :puppet_server do |puppet|
+#        puppet.puppet_server = "puppet.example42.com" if cfg[:puppetmode] == "agent"
+#      end
       local.vm.provision :puppet do |puppet|
-        if cfg[:puppetmode] = "agent"
-          puppet.puppet_server = "puppet.example42.com"
-        else
-          puppet.manifests_path = "manifests"
-          puppet.module_path = "modules"
-          puppet.manifest_file = "init.pp"
-        end
+        puppet.manifests_path = "manifests" if cfg[:puppetmode] != "agent"
+        puppet.module_path = "modules" if cfg[:puppetmode] != "agent"
+        puppet.manifest_file = "init.pp" if cfg[:puppetmode] != "agent"
         puppet.options = [
-         '--verbose',
-  #      '--debug',
+          '--verbose',
+          '--debug',
         ]
       end
+
+#      local.vm.boot_mode = :gui
+
     end
   end
 end
