@@ -15,18 +15,18 @@ Play in Puppet Playground.
 
 This command manages the playground: Vagrantfile, Puppetfile, modules/ and manifests/
 
-Usage: $0 <action> [argument]
-$0 status                - Show playground status
-$0 list                  - List the toasters available for installation
-$0 install <toaster>     - Install the specified toaster on the playground
-$0 import <toaster_path> - Import a toaster from the specified path
-$0 up [vm]               - Startup Vagrant boxes. 
-$0 run [vm]              - Run Puppet on the playground. 
-$0 clean                 - Clean up the playground (Puppet files, Vagrantfile not touched)
-$0 setup default         - Reinstall the default Vagrantfile (Puppet files not touched)
-$0 setup example42       - Install Example42 modules (Vagrantfile and manifests not touched)
-$0 forge <command>       - Execute puppet module \$* commands to interact with PuppetForge
-$0 puppi <command>       - Execute puppi \$* commands on the running boxes
+Usage: play <action> [argument]
+play status                - Show playground status
+play list                  - List the toasters available for installation
+play install <toaster>     - Install the specified toaster on the playground
+play import <toaster_path> - Import a toaster from the specified path
+play up [vm]               - Startup Vagrant boxes. 
+play run [vm]              - Run Puppet on the playground. 
+play clean                 - Clean up the playground (Puppet files, Vagrantfile not touched)
+play setup default         - Reinstall the default Vagrantfile (Puppet files not touched)
+play setup example42       - Install Example42 modules (Vagrantfile and manifests not touched)
+play forge <command>       - Execute puppet module \$* commands to interact with PuppetForge
+play puppi <command>       - Execute puppi \$* commands on the running boxes
 
 See README for more details.
 EOF
