@@ -31,10 +31,6 @@ To use toasters you also need **[Librarian Puppet](https://github.com/rodjek/lib
 
     gem install librarian-puppet
 
-Alternatively you can install Vagrant and Librarian Puppet gems with with Bundler:
-
-    bundle
-
 
 ## Basic usage
 Once you have moved into the playground you have at disposal various commands:
@@ -54,12 +50,12 @@ Once you have moved into the playground you have at disposal various commands:
 
   Eventually add the current puppet-playground dir to PATH:
 
-    PATH=$PATH:`pwd`
+    PATH=$PATH:`pwd` # This command is run by set_path.sh
 
   Show the status of the Puppet Playground with:
 
     ./play status
-    
+
   **3** - **Librarian Puppet**. Show available tasks with:
   
     librarian-puppet
