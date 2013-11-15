@@ -1,3 +1,7 @@
+Vagrant.configure("2") do |config|
+  config.cache.auto_detect = true
+  # ...
+end
 Vagrant::Config.run do |config|
 
   {
@@ -33,9 +37,9 @@ Vagrant::Config.run do |config|
       :box     => 'lucid32',
       :box_url => 'http://files.vagrantup.com/lucid32.box',
     },
-    :Debian7_64_pre => {
-      :box     => 'wheezy64_temp',
-      :box_url => 'http://dl.dropbox.com/u/937870/VMs/wheezy64.box',
+    :Debian7_64 => {
+      :box     => 'wheezy64',
+      :box_url => 'https://dl.dropboxusercontent.com/u/86066173/debian-wheezy.box',
     },
     :Debian6_64 => {
       :box     => 'ergonlogicsqueeze64',
@@ -49,10 +53,10 @@ Vagrant::Config.run do |config|
       :box     => 'OpenSuse12_1x64_July14',
       :box_url => 'https://s3.amazonaws.com/circlejtp/OpenSuseVagrant/OpenSuse12_1x64_July14.box',
     },
-    :Scientific6_64 => {
-      :box     => 'sl6_64',
-      :box_url => 'http://wc.nc.tc/puppet-playground/ScientificLinux-6.3-64-Vbox-4.2.6-Puppet-3.0.2.box',
-    }, 
+    :OpenBSD53_64 => {
+      :box     => 'OpenBSD53_64',
+      :box_url => 'https://dl.dropboxusercontent.com/u/12089300/VirtualBox/openbsd53_amd64_vagrant12.box',
+    },
   }.each do |name,cfg|
     config.vm.define name do |local|
       local.vm.box = cfg[:box]
@@ -65,7 +69,10 @@ Vagrant::Config.run do |config|
         puppet.manifest_file = "init.pp"
         puppet.options = [
          '--verbose',
-  #      '--debug',
+         '--report',
+         '--show_diff',
+#        '--debug',
+#        '--parser future',
         ]
       end
     end
