@@ -31,6 +31,10 @@ To use toasters you also need **[Librarian Puppet](https://github.com/rodjek/lib
 
     gem install librarian-puppet
 
+The default Vagrantfile uses the cachier plugin, you can install it with:
+
+    vagrant plugin install vagrant-cachier
+
 
 ## Basic usage
 Once you have moved into the playground you have at disposal various commands:
@@ -57,7 +61,7 @@ Once you have moved into the playground you have at disposal various commands:
     ./play status
 
   **3** - **Librarian Puppet**. Show available tasks with:
-  
+
     librarian-puppet
 
 
@@ -90,7 +94,7 @@ The Puppet code is placed in 2 locations of the playground:
 
       ./play setup example42
 
-  This initializes the modules dir with the Example42 NextGen modules, directly cloned from GitHub.
+  This initializes the modules dir with the Example42 modules set, directly cloned from GitHub.
 
 **4** - If you want to **test your own modules** just place them in the modules dir, one module per directory, as you would do in your puppet master.
 
@@ -122,11 +126,11 @@ Expect an output like the one below:
     Ubuntu1204_64            not created (virtualbox)
     Ubuntu1004_64            not created (virtualbox)
     Ubuntu1004_32            not created (virtualbox)
-    Debian7_64_pre           not created (virtualbox)
+    Debian7_64               not created (virtualbox)
     Debian6_64               not created (virtualbox)
     SuseLinux11_64           not created (virtualbox)
     OpenSuse12_64            not created (virtualbox)
-    Scientific6_64           not created (virtualbox)
+    OpenBSD53_64             not created (virtualbox)
 
 Note that this list is going to be updated and corrected.
 

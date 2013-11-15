@@ -99,7 +99,7 @@ run_forge() {
 setup_example42() {
   clean
   echo_title "Setting up Example42 NetGen modules"
-  git clone --recursive https://github.com/example42/puppet-modules-nextgen.git modules
+  git clone --recursive https://github.com/example42/puppet-modules.git modules
 }
 
 setup_default() {
