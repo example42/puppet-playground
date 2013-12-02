@@ -396,3 +396,7 @@ This Puppet Playground might become more and more useful if:
   - New ideas and integrations are delivered (ie: Travis, Jenkins for automatic checks of deployed toasters)
 
 Any contribution is very welcomed: the Playground is funnier if there are more kids around ;-)
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/example42/puppet-playground/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
