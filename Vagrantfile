@@ -50,6 +50,8 @@ Vagrant.configure("2") do |config|
 #      local.vm.boot_mode = :gui
       local.vm.host_name = ENV['VAGRANT_HOSTNAME'] || name.to_s.downcase.gsub(/_/, '-').concat(".example42.com")
       local.vm.provision :puppet do |puppet|
+        puppet.hiera_config_path = 'data/hiera.yaml'
+        puppet.working_directory = '/vagrant/hiera'
         puppet.manifests_path = "manifests"
         puppet.module_path = "modules"
         puppet.manifest_file = "init.pp"
