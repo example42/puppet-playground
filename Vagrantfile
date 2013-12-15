@@ -1,7 +1,7 @@
 Vagrant.configure("2") do |config|
   config.cache.auto_detect = true
   config.vm.provider :virtualbox do |v|
-    v.customize ["modifyvm", :id, "--memory", 2048]
+    v.customize ["modifyvm", :id, "--memory", 512]
     v.customize ["modifyvm", :id, "--cpus", 2]
     # v.customize ["modifyvm", :id, "--cpuexecutioncap", "50"]
   end
