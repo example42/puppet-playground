@@ -1,8 +1,5 @@
 Vagrant.configure("2") do |config|
   config.cache.auto_detect = true
-  # ...
-end
-Vagrant::Config.run do |config|
 
   {
     :Centos6_64 => {
@@ -16,6 +13,10 @@ Vagrant::Config.run do |config|
     :Centos58_64 => {
       :box     => 'centos-5.8-64bit',
       :box_url => 'http://packages.vstone.eu/vagrant-boxes/centos-5.8-64bit-latest.box',
+    },
+    :Ubuntu1404_64 => {
+      :box     => 'trusty-server-cloudimg-amd64-vagrant-disk1.box',
+      :box_url => 'https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box',
     },
     :Ubuntu1304_64 => {
       :box     => 'raring64',
@@ -64,6 +65,8 @@ Vagrant::Config.run do |config|
 #      local.vm.boot_mode = :gui
       local.vm.host_name = ENV['VAGRANT_HOSTNAME'] || name.to_s.downcase.gsub(/_/, '-').concat(".example42.com")
       local.vm.provision :puppet do |puppet|
+#       puppet.hiera_config_path = 'data/hiera.yaml'
+        puppet.working_directory = '/vagrant/data'
         puppet.manifests_path = "manifests"
         puppet.module_path = "modules"
         puppet.manifest_file = "init.pp"
@@ -71,6 +74,9 @@ Vagrant::Config.run do |config|
          '--verbose',
          '--report',
          '--show_diff',
+         '--pluginsync',
+         '--summarize',
+#        '--evaltrace',
 #        '--debug',
 #        '--parser future',
         ]
