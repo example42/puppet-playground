@@ -1,2 +1,6 @@
 ---
+<<<<<<< HEAD
 :postgresql::install_class: 'postgresql::install::postgresql_org_redhat'
+=======
+
+>>>>>>> 6cb42d9c60bff5ce54145a057ba1aefe4c8d3b82

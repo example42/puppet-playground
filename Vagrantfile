@@ -1,6 +1,5 @@
 Vagrant.configure("2") do |config|
   config.cache.auto_detect = true
-
   {
     :Centos6_64 => {
       :box     => 'centos6_64',
@@ -26,29 +25,25 @@ Vagrant.configure("2") do |config|
       :box     => 'quantal64',
       :box_url => 'http://cloud-images.ubuntu.com/vagrant/quantal/current/quantal-server-cloudimg-amd64-vagrant-disk1.box',
     },
-    :Ubuntu1204_64 => {
-      :box     => 'precise64',
-      :box_url => 'http://files.vagrantup.com/precise64.box',
+    :Ubuntu1204 => {
+      :box     => 'ubuntu-server-12042-x64-vbox4210',
+      :box_url => 'http://puppet-vagrant-boxes.puppetlabs.com/ubuntu-server-12042-x64-vbox4210.box',
     },
-    :Ubuntu1004_64 => {
-      :box     => 'lucid64',
-      :box_url => 'http://files.vagrantup.com/lucid64.box',
+    :Ubuntu1004 => {
+      :box     => 'ubuntu-server-12042-x64-vbox4210',
+      :box_url => 'http://puppet-vagrant-boxes.puppetlabs.com/ubuntu-server-12042-x64-vbox4210.box',
     },
-    :Ubuntu1004_32 => {
-      :box     => 'lucid32',
-      :box_url => 'http://files.vagrantup.com/lucid32.box',
+    :Debian7 => {
+      :box     => 'debian-70rc1-x64-vbox4210',
+      :box_url => 'http://puppet-vagrant-boxes.puppetlabs.com/debian-70rc1-x64-vbox4210.box',
     },
-    :Debian7_64 => {
-      :box     => 'wheezy64',
-      :box_url => 'https://dl.dropboxusercontent.com/u/86066173/debian-wheezy.box',
+    :Debian6 => {
+      :box     => 'debian-607-x64-vbox4210',
+      :box_url => 'http://puppet-vagrant-boxes.puppetlabs.com/debian-607-x64-vbox4210.box',
     },
-    :Debian6_64 => {
-      :box     => 'ergonlogicsqueeze64',
-      :box_url => 'http://ergonlogic.com/files/boxes/debian-current.box',
-    },
-    :SuseLinux11_64 => {
-      :box     => 'sles11sp1_64',
-      :box_url => 'http://puppetlabs.s3.amazonaws.com/pub/sles11sp1_64.box',
+    :SuseLinux11 => {
+      :box     => 'sles-11sp1-x64-vbox4210',
+      :box_url => 'http://puppet-vagrant-boxes.puppetlabs.com/sles-11sp1-x64-vbox4210.box',
     },
     :OpenSuse12_64 => {
       :box     => 'OpenSuse12_1x64_July14',
@@ -65,7 +60,7 @@ Vagrant.configure("2") do |config|
 #      local.vm.boot_mode = :gui
       local.vm.host_name = ENV['VAGRANT_HOSTNAME'] || name.to_s.downcase.gsub(/_/, '-').concat(".example42.com")
       local.vm.provision :puppet do |puppet|
-#       puppet.hiera_config_path = 'data/hiera.yaml'
+        puppet.hiera_config_path = 'data/hiera.yaml'
         puppet.working_directory = '/vagrant/data'
         puppet.manifests_path = "manifests"
         puppet.module_path = "modules"
