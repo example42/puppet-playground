@@ -275,7 +275,7 @@ To wipe off and inizialize the modules/ directory with NextGen Example42 modules
     ./play setup example42
 
 
-## Write you own toaster
+## Write your own toaster
 
 A toaster is just a **directory** that contains these files:
 
