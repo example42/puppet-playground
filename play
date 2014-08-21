@@ -64,10 +64,21 @@ list_toaster() {
 
 install_toaster() {
   clean
-  echo_title "Installing toaster $1 in the Playground"
-  cp -f $1/Puppetfile Puppetfile
-  cp -fr $1/manifests . 
-  [ -f $1/Vagrantfile ] && cp -f $1/Vagrantfile Vagrantfile
+  if [[ $1 == git@github.com:* ]]; then
+    toaster_path="/tmp/$$"
+    git_url="true"
+    git clone $1 $toaster_path
+  else
+    toaster_path=$1
+  fi
+  echo_title "Installing toaster $toaster_path in the Playground"
+  cp -f $toaster_path/Puppetfile Puppetfile
+  cp -fr $toaster_path/manifests . 
+  [ -f $toaster_path/Vagrantfile ] && cp -f $toaster_path/Vagrantfile Vagrantfile
+
+  if [[ $git_url == "true" ]]; then
+    [ -f /tmp/$$ ] && echo "rm -rf /tmp/$$"
+  fi
 
   echo_title "Running librarian-puppet install"  
   librarian-puppet install
@@ -160,7 +171,7 @@ while [ $# -gt 0 ]; do
       ;;
     install)
       action=$1
-      toaster=$2
+      toaster=$toasterdir/$2
       shift 2
       ;;
     import)
@@ -177,11 +188,6 @@ while [ $# -gt 0 ]; do
       action=$1
       up_vm=$2
       shift $#
-      ;;
-    import)
-      action=$1
-      import_path=$2
-      shift 2
       ;;
     setup)
       action=$1
