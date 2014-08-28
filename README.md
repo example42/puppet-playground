@@ -239,7 +239,7 @@ To install a specific toaster via librarian-puppet :
 
     ./play install example42-tomcat
 
-To import an external toaster (must have Puppetfile and init.pp, might have a custom Vagrantfile) from a local directory or a github repository
+To import an external toaster (must init.pp, might have a custom Puppetfile and Vagrantfile) from a local directory or a github repository
 
     ./play import /home/al/vagrant/my-appliance
     or
@@ -286,7 +286,7 @@ A toaster is just a **directory** that contains these files:
 
     manifests/
 
- 2 - A [Librarian Puppet](http://librarian-puppet.com/) formatted **Puppetfile**
+ 2 - An **optional** [Librarian Puppet](http://librarian-puppet.com/) formatted **Puppetfile**
 
     Puppetfile
 

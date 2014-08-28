@@ -46,7 +46,7 @@ cat << EOF
 I'm going to wipe out the current Playground:
 - modules/ directory
 - manifests/ directory
-- Puppetfile
+- Puppetfile (if provided)
 - Vagrantfile (if provided)
 
 Do you really want to destroy the Playground? (y/N)
@@ -64,7 +64,7 @@ list_toaster() {
 
 install_toaster() {
   clean
-  if [[ $1 == git@github.com:* ]]; then
+  if [[ $1 == git@github.com:* ]] || [[ $1 == http*://*github.com/* ]]; then
     toaster_path="/tmp/$$"
     git_url="true"
     git clone $1 $toaster_path
@@ -72,7 +72,7 @@ install_toaster() {
     toaster_path=$1
   fi
   echo_title "Installing toaster $toaster_path in the Playground"
-  cp -f $toaster_path/Puppetfile Puppetfile
+  [[ -f "${toaster_path}/Puppetfile" ]] && cp -f $toaster_path/Puppetfile Puppetfile
   cp -fr $toaster_path/manifests . 
   [ -f $toaster_path/Vagrantfile ] && cp -f $toaster_path/Vagrantfile Vagrantfile
 
@@ -80,8 +80,10 @@ install_toaster() {
     [ -f /tmp/$$ ] && echo "rm -rf /tmp/$$"
   fi
 
-  echo_title "Running librarian-puppet install"  
-  librarian-puppet install
+  if [[ -f Puppetfile ]]; then
+    echo_title "Running librarian-puppet install"
+    librarian-puppet install
+  fi
 }
 
 run_playground() {
@@ -123,24 +125,28 @@ clean() {
   echo_title "Removing modules dir, manifests/init.pp and Puppetfile from the Playground"
   rm -rf modules/
   rm -rf manifests/
-  rm -f Puppetfile
-  rm -f Puppetfile.lock
+  [[ -f Puppetfile ]] && rm -f Puppetfile
+  [[ -f Puppetfile.lock ]] && rm -f Puppetfile.lock
   mkdir manifests
   mkdir modules
   touch manifests/init.pp
 }
 
 clean_librarian() {
-  echo_title "Executing librarian-puppet clean"
-  librarian-puppet clean
+  if [[ -f Puppetfile ]]; then
+    echo_title "Executing librarian-puppet clean"
+    librarian-puppet clean
+  fi
 }
 
 status() {
   echo_title "Modules status (puppet module list --modulepath=modules/) "
   puppet module list --modulepath=modules/
 
-  echo_title "Modules status (librarian-puppet show) "
-  librarian-puppet show
+  if [[ -f Puppetfile ]]; then
+    echo_title "Modules status (librarian-puppet show) "
+    librarian-puppet show
+  fi
 
   echo_title "Content of modules/ directory "
   ls -l modules/
