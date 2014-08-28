@@ -221,7 +221,7 @@ done
 
 case $action in 
   list) list_toaster ;;
-  install) install_toaster $toasterdir/$toaster ;;
+  install) install_toaster $toaster ;;
   import) install_toaster $toaster_path ;;
   clean) clean ; clean_librarian ;;
   status) status ;;
