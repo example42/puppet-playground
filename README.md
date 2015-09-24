@@ -117,18 +117,21 @@ You can see the available VMs with:
 Expect an output like the one below:
 
     Current VM states:
-
+    
+    Centos65_64              not created (virtualbox)
+    Centos64_64              not created (virtualbox)
     Centos6_64               not created (virtualbox)
     Centos63_64              not created (virtualbox)
+    Centos510_64             not created (virtualbox)
     Centos58_64              not created (virtualbox)
+    Ubuntu1404_64            not created (virtualbox)
     Ubuntu1304_64            not created (virtualbox)
     Ubuntu1210_64            not created (virtualbox)
-    Ubuntu1204_64            not created (virtualbox)
-    Ubuntu1004_64            not created (virtualbox)
-    Ubuntu1004_32            not created (virtualbox)
-    Debian7_64               not created (virtualbox)
-    Debian6_64               not created (virtualbox)
-    SuseLinux11_64           not created (virtualbox)
+    Ubuntu1204               not created (virtualbox)
+    Ubuntu1004               not created (virtualbox)
+    Debian7                  not created (virtualbox)
+    Debian6                  not created (virtualbox)
+    SuseLinux11              not created (virtualbox)
     OpenSuse12_64            not created (virtualbox)
     OpenBSD53_64             not created (virtualbox)
 
