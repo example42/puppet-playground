@@ -1,3 +1,9 @@
+## Deprecation message
+
+This repo is no longer maintained.
+
+Check [example42 control-repo](https://github.com/example42/control-repo) for a complete Puppet control repository with multiple Vagrant environments.
+
 # Puppet Playground
 
 Welcome to the Puppet Playground where you can play with Puppet and also do some serious stuff.
