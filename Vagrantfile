@@ -1,6 +1,14 @@
 Vagrant.configure("2") do |config|
   config.cache.auto_detect = true
   {
+    :Centos72_64 => {
+      :box     => 'centos72_64',
+      :box_url => 'https://vagrantcloud.com/puppetlabs/boxes/centos-7.2-64-puppet/versions/1.0.1/providers/virtualbox.box',
+    },
+    :Centos70_64 => {
+      :box     => 'centos70_64',
+      :box_url => 'https://vagrantcloud.com/puppetlabs/boxes/centos-7.0-64-puppet/versions/1.0.2/providers/virtualbox.box',
+    },
     :Centos65_64 => {
       :box     => 'centos65_64',
       :box_url => 'http://puppet-vagrant-boxes.puppetlabs.com/centos-65-x64-virtualbox-puppet.box',
